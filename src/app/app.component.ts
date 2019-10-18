@@ -17,10 +17,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = new FormGroup({
-      firstCtrl: new FormControl("", Validators.required)
+      'firstCtrl': new FormControl("", Validators.required)
     });
     this.secondFormGroup = new FormGroup({
-      secondCtrl: new FormControl("", Validators.required)
+      'secondCtrl': new FormControl("", Validators.required)
     });
+
+    // this.firstFormGroup.valueChanges.subscribe(newVal => console.log(newVal));
+    // this.secondFormGroup.valueChanges.subscribe(newVal => console.log(newVal));
+  }
+
+  onSubmit(event: any) {
+    console.log(event);
+    // console.log(this.firstFormGroup.get('firstCtrl'));
   }
 }

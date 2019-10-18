@@ -9,9 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from "./app.component";
+import { FirstChildFormComponent } from './first-child-form/first-child-form.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FirstChildFormComponent],
   imports: [
     BrowserModule,
     FormsModule,
