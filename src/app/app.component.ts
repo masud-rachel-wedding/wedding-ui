@@ -11,24 +11,9 @@ import {
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  loggedIn = false;
 
-  ngOnInit() {
-    this.firstFormGroup = new FormGroup({
-      'firstCtrl': new FormControl("", Validators.required)
-    });
-    this.secondFormGroup = new FormGroup({
-      'secondCtrl': new FormControl("", Validators.required)
-    });
+  constructor() { }
 
-    // this.firstFormGroup.valueChanges.subscribe(newVal => console.log(newVal));
-    // this.secondFormGroup.valueChanges.subscribe(newVal => console.log(newVal));
-  }
-
-  onSubmit(event: any) {
-    console.log(event);
-    // console.log(this.firstFormGroup.get('firstCtrl'));
-  }
+  ngOnInit() { }
 }
