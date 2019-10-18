@@ -3,6 +3,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +22,8 @@ import { FirstChildFormComponent } from './stepper/first-child-form/first-child-
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
