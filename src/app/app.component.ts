@@ -11,7 +11,7 @@ import {
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  loggedIn = false;
+  loggedIn = true;
 
   constructor() { }
 
