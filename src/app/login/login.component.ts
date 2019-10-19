@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription, timer } from 'rxjs';
+import { Subscription, timer, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.reducer';
+import { login } from '../store/app.actions';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   @Output() loginResult = new EventEmitter<Boolean>();
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
+
 
   ngOnInit() {
     this.signInForm = new FormGroup({
@@ -24,16 +28,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    let username = this.signInForm.get('username').value;
-    let password = this.signInForm.get('password').value;
+    let payload = {
+      username: this.signInForm.get('username').value,
+      password: this.signInForm.get('password').value
+    }
 
     /* API CALL */
     // Send username and password to BE
     // Recieve info for the rest of the RSVP stepper
-
-    // While we wait...
+    // But in the meantime...
     this.showSpinner = true;
     this.intervalSubscription = timer(1000).subscribe( val => {
+      this.store.dispatch( login(payload));
       this.loginResult.emit(true);
       this.showSpinner = false;
     });

@@ -25,3 +25,9 @@ when inside the ts file, because we have access to the form there, but is useful
 </div>
 
 --------------------------------------------------------------------------------------------------------------------------------------------
+
+This is an example of a select function:
+
+this.username$ = this.store.pipe( select( getUsername ));
+
+--------------------------------------------------------------------------------------------------------------------------------------------

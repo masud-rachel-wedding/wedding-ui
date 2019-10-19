@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   ngOnInit() { }
 
   login(loginResult: boolean) {
-    console.log(loginResult);
     this.loggedIn = loginResult;
   }
 }
