@@ -1,0 +1,116 @@
+@import "./variables.scss";
+@import "./padding.scss";
+@import "./margin.scss";
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.fixed-top {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.position-absolute {
+    position: absolute !important;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+.zi-1 {
+    z-index: 1;
+}
+
+.zi-3 {
+    z-index: 3;
+}
+.zi-999 {
+    z-index: 999;
+}
+
+.t-0 {
+    top: 0;
+}
+
+.b-0 {
+    bottom: 0;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.vh-100 {
+    height: 100vh;
+}
+
+.w-100 {
+    width: 100%
+}
+
+.w-75 {
+    width: 75%
+}
+
+.mh-100 {
+    max-height: 100%;
+}
+
+.mh-97 {
+    max-height: 97%;
+}
+
+.mw-100 {
+    max-width: 100%;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-visible {
+    overflow: visible;
+}
+
+.hide-bottom-scrollbar {
+    margin-bottom: -50px;
+    padding-bottom: 50px;
+    scrollbar-width: none;
+}
+
+.hide-right-scrollbar {
+    margin-right: -50px;
+    padding-right: 50px;
+    scrollbar-width: none;
+}
+
+.hide-bottom-scrollbar::-webkit-scrollbar, .hide-right-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.sticky {
+    top: 0;
+    position: sticky !important;
+    z-index: 1;
+    &.bottom {
+        top: unset;
+        bottom: 0;
+    }
+}
+
+i {
+    font-style: italic;
+}
+
+.reduced-width {
+    min-width: unset !important;
+}

@@ -1,0 +1,149 @@
+.p-1 {
+  padding: calc(#{$small-gap} * 1) !important;
+}
+
+.p-2 {
+  padding: calc(#{$small-gap} * 2) !important;
+}
+
+.p-3 {
+  padding: calc(#{$small-gap} * 3) !important;
+}
+
+.p-4 {
+  padding: calc(#{$small-gap} * 4) !important;
+}
+
+.p-5 {
+  padding: calc(#{$small-gap} * 5) !important;
+}
+
+.p-6 {
+  padding: calc(#{$small-gap} * 6) !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.pt-1 {
+  padding-top: calc(#{$small-gap} * 1) !important;
+}
+
+.pt-2 {
+  padding-top: calc(#{$small-gap} * 2) !important;
+}
+
+.pt-3 {
+  padding-top: calc(#{$small-gap} * 3) !important;
+}
+
+.pt-4 {
+  padding-top: calc(#{$small-gap} * 4) !important;
+}
+
+.pt-5 {
+  padding-top: calc(#{$small-gap} * 5) !important;
+}
+
+.pt-6 {
+  padding-top: calc(#{$small-gap} * 6) !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+.pb-1 {
+  padding-bottom: calc(#{$small-gap} * 1) !important;
+}
+
+.pb-2 {
+  padding-bottom: calc(#{$small-gap} * 2) !important;
+}
+
+.pb-3 {
+  padding-bottom: calc(#{$small-gap} * 3) !important;
+}
+
+.pb-4 {
+  padding-bottom: calc(#{$small-gap} * 4) !important;
+}
+
+.pb-5 {
+  padding-bottom: calc(#{$small-gap} * 5) !important;
+}
+
+.pb-6 {
+  padding-bottom: calc(#{$small-gap} * 6) !important;
+}
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+
+.pr-1 {
+  padding-right: calc(#{$small-gap} * 1) !important;
+}
+
+.pr-2 {
+  padding-right: calc(#{$small-gap} * 2) !important;
+}
+
+.pr-3 {
+  padding-right: calc(#{$small-gap} * 3) !important;
+}
+
+.pr-4 {
+  padding-right: calc(#{$small-gap} * 4) !important;
+}
+
+.pr-5 {
+  padding-right: calc(#{$small-gap} * 5) !important;
+}
+
+.pr-6 {
+  padding-right: calc(#{$small-gap} * 6) !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.pl-1 {
+  padding-left: calc(#{$small-gap} * 1) !important;
+}
+
+.pl-2 {
+  padding-left: calc(#{$small-gap} * 2) !important;
+}
+
+.pl-3 {
+  padding-left: calc(#{$small-gap} * 3) !important;
+}
+
+.pl-4 {
+  padding-left: calc(#{$small-gap} * 4) !important;
+}
+
+.pl-5 {
+  padding-left: calc(#{$small-gap} * 5) !important;
+}
+
+.pl-6 {
+  padding-left: calc(#{$small-gap} * 6) !important;
+}
+
+.i-pb-0 {
+  div:first-child {
+      padding-bottom: 0;
+  }
+}
+
+.pt-2dpi {
+  padding-top: 16px !important;
+}
+
+.px-10 {
+  padding: 0 1em
+}
