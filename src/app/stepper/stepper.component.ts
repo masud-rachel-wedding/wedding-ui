@@ -12,14 +12,18 @@ import {
 })
 export class StepperComponent implements OnInit {
   isLinear = false;
-  firstFormGroup: FormGroup;
+  ourVision: FormGroup;
+  identifyYourParty: FormGroup;
   secondFormGroup: FormGroup;
 
   constructor() { }
 
   ngOnInit() {
-    this.firstFormGroup = new FormGroup({
-      'firstCtrl': new FormControl("", Validators.required)
+    this.ourVision = new FormGroup({
+      'voteForCountry': new FormControl("")
+    });
+    this.identifyYourParty = new FormGroup({
+      'identifyGuest': new FormControl("")
     });
     this.secondFormGroup = new FormGroup({
       'secondCtrl': new FormControl("", Validators.required)

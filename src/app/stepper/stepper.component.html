@@ -1,29 +1,22 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{ !isLinear ? "Enable linear mode" : "Disable linear mode" }}
-</button>
-
 <img src="../../assets/images/stepper_banner.jpg" alt="Greece" class="center">
 
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit($event)">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-        <app-first-child-form [parentForm]="firstFormGroup"></app-first-child-form>
+
+  <!-- Our Vision -->
+  <mat-step [stepControl]="ourVision">
+    <form [formGroup]="ourVision">
+      <ng-template matStepLabel>You're Invited!</ng-template>
+        <app-our-vision [parentForm]="ourVision"></app-our-vision>
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" />
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
+    <!-- Who's In Your Party? -->
+    <mat-step [stepControl]="identifyYourParty">
+      <form [formGroup]="identifyYourParty">
+        <ng-template matStepLabel>Who's In Your Party?</ng-template>
+          <app-identify-your-party [parentForm]="identifyYourParty"></app-identify-your-party>
+      </form>
+    </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>

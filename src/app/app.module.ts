@@ -16,9 +16,18 @@ import { AppComponent } from "./app.component";
 import { LoginComponent } from './login/login.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { FirstChildFormComponent } from './stepper/first-child-form/first-child-form.component';
+import { OurVisionComponent } from './stepper/our-vision/our-vision.component';
+import { IdentifyYourPartyComponent } from './stepper/identify-your-party/identify-your-party.component';
 
 @NgModule({
-  declarations: [AppComponent, StepperComponent, FirstChildFormComponent, LoginComponent, ],
+  declarations: [
+    AppComponent,
+    StepperComponent,
+    FirstChildFormComponent,
+    LoginComponent,
+    OurVisionComponent,
+    IdentifyYourPartyComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,
