@@ -10,6 +10,7 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { Reducer } from './store/app.reducer';
 import { AppComponent } from "./app.component";
@@ -43,7 +44,8 @@ import { SubmitRsvpComponent } from './stepper/submit-rsvp/submit-rsvp.component
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

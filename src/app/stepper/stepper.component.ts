@@ -21,9 +21,9 @@ export class StepperComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.ourVision = new FormGroup({
-      'voteForCountry': new FormControl("")
-    });
+    // this.ourVision = new FormGroup({
+    //   'voteForCountry': new FormControl(""),
+    // });
     this.identifyYourParty = new FormGroup({
       'identifyGuest': new FormControl("", Validators.required)
     });
