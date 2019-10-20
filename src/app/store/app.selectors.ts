@@ -1,4 +1,4 @@
-import { AppState, State } from './app.reducer';
+import { AppState } from './app.reducer';
 import { createSelector } from '@ngrx/store';
 
 export const selectAppState = (state: AppState) => state.reducer;
