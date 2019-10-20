@@ -1,0 +1,33 @@
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+/Users/rachellaviola/Wedding/wedding-ui/src/app/login/login.component.html
+
+The code below will submit using ngSubmit and will send in a reference to the form, which is a bit redundant
+when inside the ts file, because we have access to the form there, but is useful if you want to use *ngIf="ngForm.submitted"
+
+<img src="../../assets/images/login_banner2.jpg" alt="Croatia" class="center">
+
+<div class="flex-column align-items-center">
+  <h1>Sign In</h1>
+  <form [formGroup]="signInForm" #ngForm="ngForm" class="flex-column align-items-center" (ngSubmit)="onSubmit(ngForm)">
+    <mat-form-field>
+      <input matInput formControlName="username" placeholder="Username" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="password" placeholder="Password" type="password" required>
+    </mat-form-field>
+    <p *ngIf="ngForm.submitted">I'm submitted</p>
+    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    <button mat-raised-button type="submit" (click)="login(ngForm)" class="mt-2" color="primary">
+      Login
+    </button>
+  </form>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+This is an example of a select function:
+
+this.username$ = this.store.pipe( select( getUsername ));
+
+--------------------------------------------------------------------------------------------------------------------------------------------

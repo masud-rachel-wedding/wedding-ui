@@ -1,0 +1,19 @@
+<img src="../../assets/images/login_banner.jpg" alt="Croatia" class="center">
+
+<div class="flex-column align-items-center">
+  <h1>Sign In</h1>
+    <form [formGroup]="signInForm">
+      <div *ngIf="!showSpinner" class="flex-column align-items-center">
+        <mat-form-field>
+          <input matInput formControlName="username" placeholder="Username" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="password" placeholder="Password" type="password" required>
+        </mat-form-field>
+        <button mat-raised-button type="submit" (click)="login()" class="mt-2" color="primary">
+          Login
+        </button>
+      </div>
+    </form>
+  <mat-spinner *ngIf="showSpinner"></mat-spinner>
+</div>
