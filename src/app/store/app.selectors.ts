@@ -3,4 +3,4 @@ import { createSelector } from '@ngrx/store';
 
 export const selectAppState = (state: AppState) => state.reducer;
 
-// export const getUsername = createSelector( selectAppState, state => state.username);
+export const getPartyMembers = createSelector( selectAppState, state => state.partyMembers );

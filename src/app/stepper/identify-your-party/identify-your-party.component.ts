@@ -1,26 +1,44 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
+import { getPartyMembers } from 'src/app/store/app.selectors';
 
 @Component({
   selector: 'app-identify-your-party',
   templateUrl: './identify-your-party.component.html',
   styleUrls: ['./identify-your-party.component.scss']
 })
-export class IdentifyYourPartyComponent implements OnInit {
+export class IdentifyYourPartyComponent implements OnInit, OnDestroy {
+  partyMembers$: Observable<string[]>;
+  partyMembersSub: Subscription;
+
   @Input() parentForm: FormGroup;
     /* Parent Form:
 
     this.identifyYourParty = new FormGroup({
-      'identifyGuest': new FormControl("", Validators.required)
+      'partyMembersInfo': new FormArray([])
     });
 
     this.parentForm.get('firstCtrl').valueChanges.subscribe(newVal => console.log(newVal));
     
     */
   
-  constructor() { }
+   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.partyMembers$ = this.store.pipe( select( getPartyMembers ));
+    this.partyMembersSub = this.partyMembers$.subscribe( partyMembers => {
+      partyMembers.forEach( member => {
+        console.log(member);
+        const control = new FormControl( null, Validators.required );
+        (<FormArray>this.parentForm.get('partyMembersInfo')).push(control);
+      });
+    });
   }
 
+  ngOnDestroy() {
+    this.partyMembersSub.unsubscribe();
+  }
 }

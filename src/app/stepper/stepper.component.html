@@ -9,13 +9,20 @@
   <mat-step>
     <ng-template matStepLabel>You're Invited!</ng-template>
     <app-our-vision></app-our-vision>
+    <div class="flex-row justify-content-center mt-5">
+      <button mat-raised-button color="primary" matStepperNext style="font-size:130%">Next</button>
+    </div>
   </mat-step>
 
   <!-- Who's In? -->
   <mat-step [stepControl]="identifyYourParty">
-    <form [formGroup]="identifyYourParty">
+    <form [formGroup]="identifyYourParty" #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)">
       <ng-template matStepLabel>Who's In?</ng-template>
       <app-identify-your-party [parentForm]="identifyYourParty"></app-identify-your-party>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
     </form>
   </mat-step>
 

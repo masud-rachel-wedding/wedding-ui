@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import {
   FormGroup,
   Validators,
-  FormControl
+  FormControl,
+  FormArray
 } from "@angular/forms";
 
 @Component({
@@ -21,16 +22,16 @@ export class StepperComponent implements OnInit {
 
   ngOnInit() {
     this.identifyYourParty = new FormGroup({
-      'identifyGuest': new FormControl("", Validators.required)
+      'partyMembersInfo': new FormArray([])
     });
     this.relayConflicts = new FormGroup({
-      'conflict': new FormControl("", Validators.required)
+      'conflict': new FormControl( null, Validators.required )
     });
     this.questionnaire = new FormGroup({
-      'preference': new FormControl("", Validators.required)
+      'preference': new FormControl( null, Validators.required) 
     });
     this.rsvpInfo = new FormGroup({
-      'done': new FormControl("", Validators.required)
+      'done': new FormControl( null, Validators.required )
     });
 
     // this.firstFormGroup.valueChanges.subscribe(newVal => console.log(newVal));
@@ -38,6 +39,11 @@ export class StepperComponent implements OnInit {
   }
 
   onSubmit(event: any) {
+    console.log(event);
     // console.log(this.firstFormGroup.get('firstCtrl'));
   }
+
+  // ngOnDestroy() {
+  //   this.partyMembersSub.unsubscribe();
+  // }
 }
