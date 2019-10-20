@@ -1,6 +1,66 @@
-<mat-form-field [formGroup]="parentForm">
-  <input matInput formControlName="voteForCountry" placeholder="Last name, First name">
-</mat-form-field>
-<div>
-  <button mat-button matStepperNext>Next</button>
+<div class="flex-column align-items-center">
+
+  <div class="flex-row mb-2">
+    <img src="../../assets/images/proposal.jpg" alt="Proposal" style="margin-top:25px">
+    <div class="flex-column" style="margin-left:30px">
+      <h1 class="flex-row justify-content-center">You're Invited!</h1>
+      <span>
+        Bette Midler was born in Honolulu,[8][9] where her family was one of the few Jewish families in a mostly
+        Asian neighborhood.[10] Her mother, Ruth (née Schindel), was a seamstress and housewife, and her father,
+        Fred Midler, worked at a Navy base in Hawaii as a painter, and was also a housepainter. Both parents were
+        born in New Jersey. She was named after actress Bette Davis, though Davis pronounced her first name in two
+        syllables, and Midler uses one.[1] She was raised in Aiea and attended Radford High School, in Honolulu.[13]
+      </span>
+      <h2 class="flex-row justify-content-center">Our Vision</h2>
+      <span>
+        She was voted "Most Talkative" in the 1961 school Hoss Election, and "Most Dramatic" in her senior year (class
+        of 1963).[14] Midler majored in drama at the University of Hawaii at Manoa but left after three semesters.[15]
+        She earned money in the 1966 film Hawaii as an extra,[1] playing an uncredited seasick passenger named Miss
+        David Buff. Midler married artist Martin von Haselberg on December 16, 1984, about six weeks after their first
+        meeting. Their daughter, Sophie von Haselberg, who is also an actress, was born on November 14, 1986.[16]
+      </span>
+    </div>
+  </div>
+
+  <h3 class="flex-row justify-content-center">Just for fun, tell us which place peaks your interest more...</h3>
+  <mat-radio-group aria-label="Select a country" (change)="castVote($event)">
+    <div class="flex-row">
+
+      <div class="flex-column" style="margin-right:40px">
+        <h3 class="flex-row justify-content-center"><u>Croatia</u></h3>
+        <img src="../../assets/images/korcula.jpg" alt="small Korcula">
+        <div align="right">
+          <span class="mr-3"><i style="font-size:90%">Korcula Town, Croatia</i></span>
+        </div>
+        <ul class="flex-column align-items-center">
+          <li>Nice beaches</li>
+          <li>Game of Thrones</li>
+          <li>Slightly cheaper</li>
+        </ul>
+        <div class="flex-row justify-content-center">
+          <mat-radio-button value="croatia" class="mt-2"><strong style="font-size:115%">Vote Croatia!</strong></mat-radio-button>
+        </div>
+      </div>
+
+      <div class="flex-column">
+        <h3 class="flex-row justify-content-center"><u>Greece</u></h3>
+        <img src="../../assets/images/greek_island.jpg" alt="small Greek island">
+        <div align="right">
+          <span class="mr-3"><i style="font-size:90%">Kefalonia, Greece</i></span>
+        </div>
+        <ul class="flex-column align-items-center">
+          <li>Great food</li>
+          <li>Lots of Jews</li>
+          <li>Bad economy</li>
+        </ul>
+        <div class="flex-row justify-content-center">
+          <mat-radio-button value="greece" class="mt-2"><strong style="font-size:115%">Vote Greece!</strong></mat-radio-button>
+        </div>
+      </div>
+
+    </div>
+  </mat-radio-group>
+  <div class="mt-5">
+    <button mat-raised-button color="primary" matStepperNext style="font-size:130%">Next</button>
+  </div>
 </div>

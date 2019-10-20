@@ -1,20 +1,21 @@
 <img src="../../assets/images/stepper_banner.jpg" alt="Greece" class="center">
+<div align="right">
+  <span class="mr-3"><i style="font-size:90%">Santorini, Greece</i></span>
+</div>
 
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
 
   <!-- Our Vision -->
-  <mat-step [stepControl]="ourVision">
-    <form [formGroup]="ourVision">
-      <ng-template matStepLabel>You're Invited!</ng-template>
-        <app-our-vision [parentForm]="ourVision"></app-our-vision>
-    </form>
+  <mat-step>
+    <ng-template matStepLabel>You're Invited!</ng-template>
+    <app-our-vision></app-our-vision>
   </mat-step>
 
   <!-- Who's In? -->
   <mat-step [stepControl]="identifyYourParty">
     <form [formGroup]="identifyYourParty">
       <ng-template matStepLabel>Who's In?</ng-template>
-        <app-identify-your-party [parentForm]="identifyYourParty"></app-identify-your-party>
+      <app-identify-your-party [parentForm]="identifyYourParty"></app-identify-your-party>
     </form>
   </mat-step>
 
@@ -22,7 +23,7 @@
   <mat-step [stepControl]="relayConflicts">
     <form [formGroup]="relayConflicts">
       <ng-template matStepLabel>Tell Us Your Dates</ng-template>
-        <app-relay-your-conflicts [parentForm]="relayConflicts"></app-relay-your-conflicts>
+      <app-relay-your-conflicts [parentForm]="relayConflicts"></app-relay-your-conflicts>
     </form>
   </mat-step>
 
@@ -30,7 +31,7 @@
   <mat-step [stepControl]="questionnaire">
     <form [formGroup]="questionnaire">
       <ng-template matStepLabel>Quick Questionnaire</ng-template>
-        <app-questionnaire [parentForm]="questionnaire"></app-questionnaire>
+      <app-questionnaire [parentForm]="questionnaire"></app-questionnaire>
     </form>
   </mat-step>
 
@@ -38,7 +39,7 @@
   <mat-step [stepControl]="rsvpInfo">
       <form [formGroup]="rsvpInfo">
         <ng-template matStepLabel>Submit RSVP</ng-template>
-          <app-submit-rsvp [parentForm]="rsvpInfo"></app-submit-rsvp>
+        <app-submit-rsvp [parentForm]="rsvpInfo"></app-submit-rsvp>
       </form>
   </mat-step>
 
