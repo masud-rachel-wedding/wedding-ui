@@ -11,10 +11,12 @@ import {
   styleUrls: ['./stepper.component.scss']
 })
 export class StepperComponent implements OnInit {
-  isLinear = false;
+  isLinear: boolean = false;
   ourVision: FormGroup;
   identifyYourParty: FormGroup;
-  secondFormGroup: FormGroup;
+  relayConflicts: FormGroup;
+  questionnaire: FormGroup;
+  rsvpInfo: FormGroup;
 
   constructor() { }
 
@@ -23,10 +25,16 @@ export class StepperComponent implements OnInit {
       'voteForCountry': new FormControl("")
     });
     this.identifyYourParty = new FormGroup({
-      'identifyGuest': new FormControl("")
+      'identifyGuest': new FormControl("", Validators.required)
     });
-    this.secondFormGroup = new FormGroup({
-      'secondCtrl': new FormControl("", Validators.required)
+    this.relayConflicts = new FormGroup({
+      'conflict': new FormControl("", Validators.required)
+    });
+    this.questionnaire = new FormGroup({
+      'preference': new FormControl("", Validators.required)
+    });
+    this.rsvpInfo = new FormGroup({
+      'done': new FormControl("", Validators.required)
     });
 
     // this.firstFormGroup.valueChanges.subscribe(newVal => console.log(newVal));
@@ -34,7 +42,6 @@ export class StepperComponent implements OnInit {
   }
 
   onSubmit(event: any) {
-    console.log(event);
     // console.log(this.firstFormGroup.get('firstCtrl'));
   }
 }

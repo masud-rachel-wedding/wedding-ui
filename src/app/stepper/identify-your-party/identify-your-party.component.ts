@@ -11,8 +11,10 @@ export class IdentifyYourPartyComponent implements OnInit {
     /* Parent Form:
 
     this.identifyYourParty = new FormGroup({
-      'identifyGuest': new FormControl("")
+      'identifyGuest': new FormControl("", Validators.required)
     });
+
+    this.parentForm.get('firstCtrl').valueChanges.subscribe(newVal => console.log(newVal));
     
     */
   

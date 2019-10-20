@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FirstChildFormComponent } from './first-child-form.component';
+import { RelayYourConflictsComponent } from './relay-your-conflicts.component';
 
-describe('FirstChildFormComponent', () => {
-  let component: FirstChildFormComponent;
-  let fixture: ComponentFixture<FirstChildFormComponent>;
+describe('RelayYourConflictsComponent', () => {
+  let component: RelayYourConflictsComponent;
+  let fixture: ComponentFixture<RelayYourConflictsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FirstChildFormComponent ]
+      declarations: [ RelayYourConflictsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FirstChildFormComponent);
+    fixture = TestBed.createComponent(RelayYourConflictsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,22 +2,21 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-our-vision',
-  templateUrl: './our-vision.component.html',
-  styleUrls: ['./our-vision.component.scss']
+  selector: 'app-questionnaire',
+  templateUrl: './questionnaire.component.html',
+  styleUrls: ['./questionnaire.component.scss']
 })
-export class OurVisionComponent implements OnInit {
+export class QuestionnaireComponent implements OnInit {
   @Input() parentForm: FormGroup;
     /* Parent Form:
 
-    this.ourVision = new FormGroup({
-      'voteForCountry': new FormControl("")
+    this.questionnaire = new FormGroup({
+      'preference': new FormControl("", Validators.required)
     });
 
     this.parentForm.get('firstCtrl').valueChanges.subscribe(newVal => console.log(newVal));
     
     */
-
   constructor() { }
 
   ngOnInit() {
