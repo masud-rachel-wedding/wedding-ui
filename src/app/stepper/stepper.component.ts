@@ -12,7 +12,6 @@ import {
 })
 export class StepperComponent implements OnInit {
   isLinear: boolean = false;
-  ourVision: FormGroup;
   identifyYourParty: FormGroup;
   relayConflicts: FormGroup;
   questionnaire: FormGroup;
@@ -21,9 +20,6 @@ export class StepperComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this.ourVision = new FormGroup({
-    //   'voteForCountry': new FormControl(""),
-    // });
     this.identifyYourParty = new FormGroup({
       'identifyGuest': new FormControl("", Validators.required)
     });
