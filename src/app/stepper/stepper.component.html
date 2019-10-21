@@ -19,9 +19,9 @@
     <form [formGroup]="identifyYourParty" #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)">
       <ng-template matStepLabel>Who's In?</ng-template>
       <app-identify-your-party [parentForm]="identifyYourParty"></app-identify-your-party>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="flex-row justify-content-center mt-2">
+        <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
+        <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
       </div>
     </form>
   </mat-step>

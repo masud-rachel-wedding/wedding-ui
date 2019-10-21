@@ -22,7 +22,8 @@ export class StepperComponent implements OnInit {
 
   ngOnInit() {
     this.identifyYourParty = new FormGroup({
-      'partyMembersInfo': new FormArray([])
+      'partyMembersInfo': new FormArray([]),
+      'elaborateOnInfo': new FormControl(null)
     });
     this.relayConflicts = new FormGroup({
       'conflict': new FormControl( null, Validators.required )
