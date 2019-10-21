@@ -1,7 +1,42 @@
-<mat-form-field [formGroup]="parentForm">
-  <input matInput formControlName="identifyGuest" placeholder="Last name, First name">
-</mat-form-field>
 <div>
-  <button mat-button matStepperPrevious>Back</button>
-  <button mat-button matStepperNext>Next</button>
+  <h1 class="flex-row justify-content-center">Who's in your party?</h1>
+  <p style="margin-left:50px;margin-right:50px">
+      Midler relocated to New York City in the summer of 1965, using money from her work in the film
+      Hawaii. She studied theatre at HB Studio[17] under Uta Hagen. She landed her first professional
+      onstage role in Tom Eyen's Off-Off-Broadway plays in 1965, Miss Nefertiti Regrets and Cinderella
+      Revisited, a children's play by day and an adult show by night.[18] From 1966 to 1969, she played
+      the role of Tzeitel in Fiddler on the Roof on Broadway.[1] After Fiddler, she joined the original
+      cast of Salvation in 1969.[19]
+  </p>
+  <div [formGroup]="parentForm">
+    <div class="flex-column align-items-center" formArrayName="partyMembersInfo">
+      <table class="mt-2" style="width:60%">
+        <tr>
+          <th>Guest</th>
+          <th>Would like to come!</th>
+          <th>Thats a maybe...</th>
+          <th>Probably can't (sorry)</th>
+        </tr>
+        <div *ngFor="let partyMember of parentForm.get('partyMembersInfo').controls; let i = index">
+          <mat-radio-group [formControlName]="i" aria-label="Get party member info" (change)="tableChange($event, i)">
+            <tr>
+              <td>{{ partyMembers[i] }}</td>
+              <td><mat-radio-button value="coming"></mat-radio-button></td>
+              <td><mat-radio-button value="maybe"></mat-radio-button></td>
+              <td><mat-radio-button value="probablyNot"></mat-radio-button></td>
+            </tr> 
+          </mat-radio-group>
+        </div>
+      </table>
+    </div>
+    <div class="flex-column align-items-center mt-6">
+      <mat-form-field appearance="outline" style="width:65%">
+        <mat-label>If the table doesn't capture everything you want to say, feel free to elaborate here.</mat-label>
+        <textarea matInput formControlName="elaborateOnInfo" (blur)="saveElaboration()" rows="5" class="dark-outline" style="font-size:85%"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
 </div>
+
+
+
