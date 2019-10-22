@@ -26,7 +26,6 @@ export class IdentifyYourPartyComponent implements OnInit, OnDestroy {
     });
 
     this.parentForm.get('firstCtrl').valueChanges.subscribe(newVal => console.log(newVal));
-    
     */
   
    constructor(private store: Store<AppState>) { }

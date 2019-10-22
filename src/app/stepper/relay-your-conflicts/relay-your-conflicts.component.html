@@ -1,3 +1,66 @@
-<mat-form-field [formGroup]="parentForm">
-  <input matInput formControlName="conflict" placeholder="Last name, First name">
-</mat-form-field>
+<h1 class="flex-row justify-content-center">Help Us Know When You're Free</h1>
+<p style="margin-left:50px;margin-right:50px">
+    Midler relocated to New York City in the summer of 1965, using money from her work in the film
+    Hawaii. She studied theatre at HB Studio[17] under Uta Hagen. She landed her first professional
+    onstage role in Tom Eyen's Off-Off-Broadway plays in 1965, Miss Nefertiti Regrets and Cinderella
+    Revisited, a children's play by day and an adult show by night.[18] From 1966 to 1969, she played
+    the role of Tzeitel in Fiddler on the Roof on Broadway.[1] After Fiddler, she joined the original
+    cast of Salvation in 1969.[19]
+</p>
+<div align="right" style="margin-right:30px">
+  <button mat-raised-button color="primary" matStepperPrevious style="font-size:95%">Add Another Conflict</button>
+</div>
+<div [formGroup]="parentForm">
+  <div formArrayName="conflicts">
+    <table class="mt-2" style="width:100%">
+      <tr>
+        <th>Conflict applies to...</th>
+        <th>Description</th>
+        <th>Starts on</th>
+        <th>Ends on</th>
+        <th>Remove</th>
+      </tr>
+      <div *ngFor="let p of parentForm.get('conflicts').controls; let i = index">
+        <div [formGroupName]="i">
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-label>Select party members</mat-label>
+                <mat-select formControlName="partyMembers" multiple>
+                  <mat-option *ngFor="let partyMember of (partyMembers$ | async)" [value]="partyMember">{{ partyMember }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline">
+                <mat-label>Add description</mat-label>
+                <textarea matInput formControlName="description" (blur)="saveElaboration()" rows="2" class="dark-outline" style="font-size:85%"></textarea>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput formControlName="startsOnDate" [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" placeholder="Starts on">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput formControlName="endsOnDate" [min]="minDate" [max]="maxDate" [matDatepicker]="picker2" placeholder="Ends on">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <div class="center">
+                <button mat-raised-button color="accent" matStepperPrevious style="font-size:95%">Remove</button>
+              </div>
+            </td>
+          </tr>
+        </div>
+      </div>
+    </table>
+  </div>
+</div>
+
+

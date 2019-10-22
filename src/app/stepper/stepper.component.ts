@@ -14,6 +14,8 @@ import {
 export class StepperComponent implements OnInit {
   isLinear: boolean = false;
   identifyYourParty: FormGroup;
+  conflictGroup1: FormGroup;
+  conflictGroup2: FormGroup;
   relayConflicts: FormGroup;
   questionnaire: FormGroup;
   rsvpInfo: FormGroup;
@@ -25,8 +27,20 @@ export class StepperComponent implements OnInit {
       'partyMembersInfo': new FormArray([]),
       'elaborateOnInfo': new FormControl(null)
     });
+    this.conflictGroup1 = new FormGroup({
+      'partyMembers': new FormControl(null),
+      'description': new FormControl(null),
+      'startsOnDate': new FormControl(null),
+      'endsOnDate': new FormControl(null)
+    });
+    this.conflictGroup2 = new FormGroup({
+      'partyMembers': new FormControl(null),
+      'description': new FormControl(null),
+      'startsOnDate': new FormControl(null),
+      'endsOnDate': new FormControl(null)
+    });
     this.relayConflicts = new FormGroup({
-      'conflict': new FormControl( null, Validators.required )
+      'conflicts': new FormArray([this.conflictGroup1, this.conflictGroup2])
     });
     this.questionnaire = new FormGroup({
       'preference': new FormControl( null, Validators.required) 
