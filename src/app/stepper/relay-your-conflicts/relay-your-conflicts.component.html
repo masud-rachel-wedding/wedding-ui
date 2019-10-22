@@ -14,44 +14,44 @@
   <div formArrayName="conflicts">
     <table class="mt-2" style="width:100%">
       <tr>
-        <th>Conflict applies to...</th>
-        <th>Description</th>
-        <th>Starts on</th>
-        <th>Ends on</th>
-        <th>Remove</th>
+        <th style="width:22%">Conflict applies to...</th>
+        <th style="width:38%">Description</th>
+        <th style="width:15%">Starts on</th>
+        <th style="width:15%">Ends on</th>
+        <th style="width:10%">Remove</th>
       </tr>
       <div *ngFor="let p of parentForm.get('conflicts').controls; let i = index">
         <div [formGroupName]="i">
           <tr>
-            <td>
-              <mat-form-field>
-                <mat-label>Select party members</mat-label>
-                <mat-select formControlName="partyMembers" multiple>
+            <td style="width:22%">
+              <mat-form-field style="width:90%">
+                <mat-label style="font-size:90%">Select party members</mat-label>
+                <mat-select style="font-size:85%" formControlName="partyMembers" multiple>
                   <mat-option *ngFor="let partyMember of (partyMembers$ | async)" [value]="partyMember">{{ partyMember }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </td>
-            <td>
-              <mat-form-field appearance="outline">
-                <mat-label>Add description</mat-label>
-                <textarea matInput formControlName="description" (blur)="saveElaboration()" rows="2" class="dark-outline" style="font-size:85%"></textarea>
+            <td style="width:38%">
+              <mat-form-field appearance="outline" style="width:90%">
+                <mat-label style="font-size:90%">Add description</mat-label>
+                <textarea matInput formControlName="description" (blur)="saveElaboration()" rows="2" style="font-size:90%"></textarea>
               </mat-form-field>
             </td>
-            <td>
-              <mat-form-field>
+            <td style="width:15%">
+              <mat-form-field style="width:75%;font-size:90%">
                 <input matInput formControlName="startsOnDate" [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" placeholder="Starts on">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
             </td>
-            <td>
-              <mat-form-field>
+            <td style="width:15%">
+              <mat-form-field style="width:75%;font-size:90%">
                 <input matInput formControlName="endsOnDate" [min]="minDate" [max]="maxDate" [matDatepicker]="picker2" placeholder="Ends on">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
             </td>
-            <td>
+            <td style="width:10%">
               <div class="center">
                 <button mat-raised-button color="accent" matStepperPrevious style="font-size:95%">Remove</button>
               </div>
