@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Observable } from 'rxjs';
 import { getPartyMembers } from 'src/app/store/app.selectors';
+import { MatCheckbox } from '@angular/material';
 
 @Component({
   selector: 'app-relay-your-conflicts',
@@ -11,6 +12,8 @@ import { getPartyMembers } from 'src/app/store/app.selectors';
   styleUrls: ['./relay-your-conflicts.component.scss']
 })
 export class RelayYourConflictsComponent implements OnInit {
+  unsure: boolean = false;
+  unsureForm: FormGroup;
   partyMembers$: Observable<string[]>;
   minDate = new Date(2020, 6, 1);
   maxDate = new Date(2020, 8, 21);
@@ -34,7 +37,15 @@ export class RelayYourConflictsComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
+    this.unsureForm = new FormGroup({
+      'partyMembers': new FormControl(null),
+      'description': new FormControl(null),
+      'knowByDate': new FormControl(null),
+    });
     this.partyMembers$ = this.store.pipe( select( getPartyMembers ));
   }
-
+  
+  unsureBoxChange(event: MatCheckbox) {
+    this.unsure = event.checked;
+  }
 }

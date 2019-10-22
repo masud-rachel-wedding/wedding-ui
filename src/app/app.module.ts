@@ -14,7 +14,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
-// import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { MatCheckboxModule } from '@angular/material/checkbox';
  
 import { Reducer } from './store/app.reducer';
 import { AppComponent } from "./app.component";
@@ -52,7 +52,8 @@ import { SubmitRsvpComponent } from './stepper/submit-rsvp/submit-rsvp.component
     MatRadioModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

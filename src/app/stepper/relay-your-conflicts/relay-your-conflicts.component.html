@@ -1,4 +1,7 @@
-<h1 class="flex-row justify-content-center">Help Us Know When You're Free</h1>
+<h1 class="flex-row justify-content-center">Help Us Know When You're Not Free</h1>
+<p style="margin-left:50px;margin-right:50px">
+    If you know you'll be good for any time, feel free to move on to the next step!
+</p>
 <p style="margin-left:50px;margin-right:50px">
     Midler relocated to New York City in the summer of 1965, using money from her work in the film
     Hawaii. She studied theatre at HB Studio[17] under Uta Hagen. She landed her first professional
@@ -7,6 +10,45 @@
     the role of Tzeitel in Fiddler on the Roof on Broadway.[1] After Fiddler, she joined the original
     cast of Salvation in 1969.[19]
 </p>
+
+<div class="flex-row justify-content-center">
+  <strong style="font-size:115%">
+    If you or another member of your party feels too unsure of their schedule right
+    now to fill this out, please let us know by checking this box:
+  </strong>
+  <mat-checkbox class="ml-2" (change)="unsureBoxChange($event)"></mat-checkbox>
+</div>
+
+<div *ngIf="unsure">
+  <form [formGroup]="unsureForm">
+    <div class="flex-row justify-content-center">
+      <span style="margin-top:20px;margin-right:30px">Who can't fill out the form?</span>
+      <mat-form-field style="width:20%">
+        <mat-label style="font-size:90%">Select party members</mat-label>
+        <mat-select style="font-size:85%" formControlName="partyMembers" multiple>
+          <mat-option *ngFor="let partyMember of (partyMembers$ | async)" [value]="partyMember">{{ partyMember }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="flex-row justify-content-center">
+      <span style="margin-top:20px;margin-right:30px">Want to tell us a bit more?</span>
+      <mat-form-field appearance="outline" style="width:50%">
+        <mat-label style="font-size:90%">Tell us more</mat-label>
+        <textarea matInput formControlName="description" (blur)="saveElaboration()" rows="2" style="font-size:90%"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="flex-row justify-content-center">
+      <span style="margin-top:20px;margin-right:30px">When do you think you'll have a better idea of your schedule by?</span>
+      <mat-form-field style="width:20%;font-size:90%">
+          <input matInput formControlName="knowByDate" [matDatepicker]="picker3" placeholder="MM/DD/YYYY">
+          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<br><br>
 <div align="right" style="margin-right:30px">
   <button mat-raised-button color="primary" matStepperPrevious style="font-size:95%">Add Another Conflict</button>
 </div>
