@@ -1,3 +1,8 @@
+.mat-elevation-z3 {
+  // background-color: #D98880;
+  background-color: #f5e6b5;
+}
+
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -12,6 +17,12 @@ tr {
 th, td {
   padding: 5px;
   text-align: center;
+}
+
+tr.no-borders td {
+  border: 0;
+  padding: 15px;
+  background-color: #b5e4f5;
 }
 
 p {
