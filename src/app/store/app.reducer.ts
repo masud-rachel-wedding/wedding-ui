@@ -3,7 +3,8 @@ import {
   login,
   updatePartyMemberStatus,
   updatePartyMembersElaboration, 
-  updateOptOutPartyMembers}from './app.actions';
+  updateOptOutPartyMembers,
+  updateOptOutElaboration}from './app.actions';
 import { PartyMemberRow } from './app.index'
 
 export interface AppState {
@@ -17,6 +18,7 @@ export interface State {
   partyMembersInfo: PartyMemberRow[];
   partyMembersElaboration: string;
   optOutPartyMembers: string[];
+  optOutElaboration: string;
 };
 
 const initialState: State = {
@@ -29,7 +31,8 @@ const initialState: State = {
     { name: 'Baby Shankur', coming: null, maybe: null, probablyNot: null }
   ],
   partyMembersElaboration: null,
-  optOutPartyMembers: null
+  optOutPartyMembers: null,
+  optOutElaboration: null
 };
  
 export function Reducer(state: State | undefined, payload: Action) {
@@ -65,6 +68,9 @@ export function Reducer(state: State | undefined, payload: Action) {
       return { ...state, optOutPartyMembers: payload.optOutPartyMembers };
     }),
 
+    on( updateOptOutElaboration, (state, payload) => {
+      return { ...state, optOutElaboration: payload.elaboration };
+    }),
     
 
   )(state, payload);

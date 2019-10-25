@@ -1,18 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Observable, Subscription } from 'rxjs';
 import { getPartyMembers } from 'src/app/store/app.selectors';
 import { MatCheckbox } from '@angular/material';
-import { updateOptOutPartyMembers } from 'src/app/store/app.actions';
+import { updateOptOutPartyMembers, updateOptOutElaboration } from 'src/app/store/app.actions';
 
 @Component({
   selector: 'app-relay-your-conflicts',
   templateUrl: './relay-your-conflicts.component.html',
   styleUrls: ['./relay-your-conflicts.component.scss']
 })
-export class RelayYourConflictsComponent implements OnInit {
+export class RelayYourConflictsComponent implements OnInit, OnDestroy {
   unsure: boolean = false;
   unsureForm: FormGroup;
   partyMembers$: Observable<string[]>;
@@ -44,7 +44,7 @@ export class RelayYourConflictsComponent implements OnInit {
   ngOnInit() {
     this.unsureForm = new FormGroup({
       'partyMembers': new FormControl(null),
-      'description': new FormControl(null),
+      'elaboration': new FormControl(null),
       'knowByDate': new FormControl(null),
     });
     this.partyMembers$ = this.store.pipe( select( getPartyMembers ));
@@ -85,5 +85,16 @@ export class RelayYourConflictsComponent implements OnInit {
       this.fyi = false;
     }
     this.store.dispatch( updateOptOutPartyMembers( payload));
+  }
+
+  saveElaboration() {
+    let payload = {
+      elaboration: this.unsureForm.get('elaboration').value
+    }
+    this.store.dispatch( updateOptOutElaboration( payload));
+  }
+
+  ngOnDestroy() {
+    this.partyMembersSub.unsubscribe();
   }
 }
