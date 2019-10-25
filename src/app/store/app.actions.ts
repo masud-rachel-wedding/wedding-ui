@@ -5,6 +5,7 @@ export const updatePartyMemberStatus = createAction('Update the status of a part
 export const updatePartyMembersElaboration = createAction('Update the partyMembersInfo elaboration', props<{ elaboration: string }>());
 export const updateOptOutPartyMembers = createAction('Update which party members cannot fill out conflicts', props<{ optOutPartyMembers: string[] }>());
 export const updateOptOutElaboration = createAction('Update the opt-out elaboration', props<{ elaboration: string }>());
+export const updateOptOutKnowByDate = createAction('Update the opt-out know-by date', props<{ knowByDate: string[] }>());
 
 
 

@@ -4,7 +4,9 @@ import {
   updatePartyMemberStatus,
   updatePartyMembersElaboration, 
   updateOptOutPartyMembers,
-  updateOptOutElaboration}from './app.actions';
+  updateOptOutElaboration,
+  updateOptOutKnowByDate
+}from './app.actions';
 import { PartyMemberRow } from './app.index'
 
 export interface AppState {
@@ -19,6 +21,7 @@ export interface State {
   partyMembersElaboration: string;
   optOutPartyMembers: string[];
   optOutElaboration: string;
+  optOutKnowByDate: string[];
 };
 
 const initialState: State = {
@@ -32,7 +35,8 @@ const initialState: State = {
   ],
   partyMembersElaboration: null,
   optOutPartyMembers: null,
-  optOutElaboration: null
+  optOutElaboration: null,
+  optOutKnowByDate: null
 };
  
 export function Reducer(state: State | undefined, payload: Action) {
@@ -72,6 +76,11 @@ export function Reducer(state: State | undefined, payload: Action) {
       return { ...state, optOutElaboration: payload.elaboration };
     }),
     
+    on( updateOptOutKnowByDate, (state, payload) => {
+      return { ...state, optOutKnowByDate: payload.knowByDate };
+    }),
 
+
+    
   )(state, payload);
 }

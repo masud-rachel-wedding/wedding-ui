@@ -5,7 +5,11 @@ import { AppState } from 'src/app/store/app.reducer';
 import { Observable, Subscription } from 'rxjs';
 import { getPartyMembers } from 'src/app/store/app.selectors';
 import { MatCheckbox } from '@angular/material';
-import { updateOptOutPartyMembers, updateOptOutElaboration } from 'src/app/store/app.actions';
+import {
+  updateOptOutPartyMembers,
+  updateOptOutElaboration,
+  updateOptOutKnowByDate
+} from 'src/app/store/app.actions';
 
 @Component({
   selector: 'app-relay-your-conflicts',
@@ -20,8 +24,11 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
   partySize: number;
   optOutPartyMembersStr: string = '';
   fyi: boolean = false;
-  minDate = new Date(2020, 6, 1);
-  maxDate = new Date(2020, 8, 21);
+  minKnowByDate = new Date();
+  minDate = new Date();
+  maxDate = new Date(2020, 2, 21);
+  knowByDateSub: Subscription;
+  calendarHash = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
 
   @Input() parentForm: FormGroup;
     /* Parent Form:
@@ -50,7 +57,19 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
     this.partyMembers$ = this.store.pipe( select( getPartyMembers ));
     this.partyMembersSub = this.partyMembers$.subscribe( party => {
       this.partySize = party.length;
+    });
+    this.knowByDateSub = this.unsureForm.get('knowByDate').valueChanges.subscribe( date => {
+      let dateArray = this.getDateArray(date);
+      let payload = {
+        knowByDate: dateArray
+      }
+      this.store.dispatch( updateOptOutKnowByDate( payload));
     })
+  }
+
+  getDateArray(date: Date) {
+    let dateArray = date.toString().split(' ');
+    return [ this.calendarHash[dateArray[1]], dateArray[2], dateArray[3] ];
   }
   
   unsureBoxChange(event: MatCheckbox) {
