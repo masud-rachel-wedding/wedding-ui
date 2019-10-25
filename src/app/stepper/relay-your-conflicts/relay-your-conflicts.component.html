@@ -30,10 +30,11 @@
           <span style="margin-top:20px;margin-right:30px;font-size:90%">Who can't fill out the form?</span>
           <mat-form-field style="width:30%" appearance="outline">
             <mat-label style="font-size:90%;">Select party members</mat-label>
-            <mat-select style="font-size:85%;" formControlName="partyMembers" multiple>
+            <mat-select style="font-size:85%;" formControlName="partyMembers" (selectionChange)="optOutPartyMembers()" multiple>
               <mat-option *ngFor="let partyMember of (partyMembers$ | async)" [value]="partyMember">{{ partyMember }}</mat-option>
             </mat-select>
           </mat-form-field>
+          <span *ngIf="fyi" class="ml-2" style="width:35%"><strong>FYI - The rest of your party can still input their conflicts, even if {{ optOutPartyMembersStr }} can't.</strong></span>
         </div>
         <div class="flex-row justify-content-left" style="margin-left:55px">
           <span style="margin-top:30px;margin-right:30px;font-size:90%">Want to tell us a bit more?</span>

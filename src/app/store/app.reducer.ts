@@ -2,7 +2,8 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   login,
   updatePartyMemberStatus,
-  updatePartyMembersElaboration }from './app.actions';
+  updatePartyMembersElaboration, 
+  updateOptOutPartyMembers}from './app.actions';
 import { PartyMemberRow } from './app.index'
 
 export interface AppState {
@@ -15,18 +16,20 @@ export interface State {
   partyMembers: string[];
   partyMembersInfo: PartyMemberRow[];
   partyMembersElaboration: string;
+  optOutPartyMembers: string[];
 };
 
 const initialState: State = {
   username: null,
   password: null,
-  partyMembers: ['Nila Bala', 'Mukie Ramkumar', 'Baby Shankur'],
+  partyMembers: ['Nila Bala', 'Mukie Ramkumar', 'Baby Shankur', 'Baby Sharktooth'],
   partyMembersInfo: [
     { name: 'Nila Bala', coming: null, maybe: null, probablyNot: null },
     { name: 'Mukie Ramkumar', coming: null, maybe: null, probablyNot: null },
     { name: 'Baby Shankur', coming: null, maybe: null, probablyNot: null }
   ],
-  partyMembersElaboration: null
+  partyMembersElaboration: null,
+  optOutPartyMembers: null
 };
  
 export function Reducer(state: State | undefined, payload: Action) {
@@ -57,6 +60,12 @@ export function Reducer(state: State | undefined, payload: Action) {
     on( updatePartyMembersElaboration, (state, payload) => {
       return { ...state, partyMembersElaboration: payload.elaboration };
     }),
+
+    on( updateOptOutPartyMembers, (state, payload) => {
+      return { ...state, optOutPartyMembers: payload.optOutPartyMembers };
+    }),
+
+    
 
   )(state, payload);
 }
