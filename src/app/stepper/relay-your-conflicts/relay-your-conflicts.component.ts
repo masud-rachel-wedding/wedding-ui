@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Observable, Subscription } from 'rxjs';
@@ -10,6 +10,7 @@ import {
   updateOptOutElaboration,
   updateOptOutKnowByDate
 } from 'src/app/store/app.actions';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-relay-your-conflicts',
@@ -29,7 +30,9 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
   maxDate = new Date(2020, 2, 21);
   knowByDateSub: Subscription;
   calendarHash = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
+  conflictCount: number = 1;
 
+  @Output() conflictCounter = new EventEmitter<number>();
   @Input() parentForm: FormGroup;
     /* Parent Form:
 
@@ -111,6 +114,25 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
       elaboration: this.unsureForm.get('elaboration').value
     }
     this.store.dispatch( updateOptOutElaboration( payload));
+  }
+
+  addConflict() {
+    const conflictGroup = new FormGroup({
+      'partyMembers': new FormControl(null),
+      'description': new FormControl(null),
+      'startsOnDate': new FormControl(null),
+      'endsOnDate': new FormControl(null)
+    });
+    (<FormArray>this.parentForm.get('conflicts')).push(conflictGroup);
+    this.conflictCount = this.conflictCount + 1;
+    this.conflictCounter.emit(this.conflictCount);
+    console.log((<FormArray>this.parentForm.get('conflicts')).value);
+  }
+
+  removeConflict(i: number) {
+    (<FormArray>this.parentForm.get('conflicts')).removeAt(i);
+    this.conflictCount = this.conflictCount - 1;
+    this.conflictCounter.emit(this.conflictCount);
   }
 
   ngOnDestroy() {

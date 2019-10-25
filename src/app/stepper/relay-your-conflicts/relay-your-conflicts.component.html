@@ -66,7 +66,9 @@
             <strong style="font-size:120%">Enter Conflicts Here</strong>
           </td>
           <td>
-            <button mat-raised-button matStepperPrevious color="primary" style="float:right;font-size:105%;">Add Another Conflict</button>
+            <button mat-raised-button type="button" (click)="addConflict()" color="primary" style="float:right;font-size:105%;">
+              Add Another Conflict
+            </button>
           </td>
       </tr>
       <tr>
@@ -109,7 +111,9 @@
             </td>
             <td style="width:10%">
               <div class="center">
-                <button mat-raised-button style="font-size:95%;background-color:#900C3F;color:#f5e6b5">Remove</button>
+                <button mat-raised-button type="button" (click)="removeConflict(i)" style="font-size:95%;background-color:#900C3F;color:#f5e6b5">
+                  Remove
+                </button>
               </div>
             </td>
           </tr>

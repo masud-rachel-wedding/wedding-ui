@@ -14,11 +14,12 @@ import {
 export class StepperComponent implements OnInit {
   isLinear: boolean = false;
   identifyYourParty: FormGroup;
-  conflictGroup1: FormGroup;
+  conflictGroup: FormGroup;
   conflictGroup2: FormGroup;
   relayConflicts: FormGroup;
   questionnaire: FormGroup;
   rsvpInfo: FormGroup;
+  conflictCount: number = 1;
 
   constructor() { }
 
@@ -27,20 +28,14 @@ export class StepperComponent implements OnInit {
       'partyMembersInfo': new FormArray([]),
       'elaborateOnInfo': new FormControl(null)
     });
-    this.conflictGroup1 = new FormGroup({
-      'partyMembers': new FormControl(null),
-      'description': new FormControl(null),
-      'startsOnDate': new FormControl(null),
-      'endsOnDate': new FormControl(null)
-    });
-    this.conflictGroup2 = new FormGroup({
+    this.conflictGroup = new FormGroup({
       'partyMembers': new FormControl(null),
       'description': new FormControl(null),
       'startsOnDate': new FormControl(null),
       'endsOnDate': new FormControl(null)
     });
     this.relayConflicts = new FormGroup({
-      'conflicts': new FormArray([this.conflictGroup1, this.conflictGroup2])
+      'conflicts': new FormArray([this.conflictGroup])
     });
     this.questionnaire = new FormGroup({
       'preference': new FormControl( null, Validators.required) 
@@ -56,6 +51,17 @@ export class StepperComponent implements OnInit {
   onSubmit(event: any) {
     console.log(event);
     // console.log(this.firstFormGroup.get('firstCtrl'));
+  }
+
+  updateConflictCount(count: number) {
+    this.conflictCount = count;
+  }
+
+  stepChange(event: any) {
+    // console.log(this.conflictCount);
+    if (event.previouslySelecedIndex === 2) {
+      console.log((<FormArray>this.relayConflicts.get('conflicts')).value);
+    }
   }
 
   // ngOnDestroy() {
