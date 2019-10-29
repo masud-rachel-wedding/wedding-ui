@@ -25,8 +25,6 @@ export class IdentifyYourPartyComponent implements OnInit, OnDestroy {
       'elaborateOnInfo': new FormControl(null)
     });
 
-    this.parentForm.get('firstCtrl').valueChanges.subscribe(newVal => console.log(newVal));
-    
     */
   
    constructor(private store: Store<AppState>) { }

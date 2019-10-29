@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
+import { updateCountryVote } from 'src/app/store/app.actions';
 
 @Component({
   selector: 'app-our-vision',
@@ -8,16 +10,16 @@ import { MatRadioChange } from '@angular/material/radio';
   styleUrls: ['./our-vision.component.scss']
 })
 export class OurVisionComponent implements OnInit {
-  countryVote: string;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() { }
 
   castVote(event: MatRadioChange) {
-    this.countryVote = event.value;
-    /* API CALL */
-    // Send username and countryVote to BE
+    let payload = {
+      countryVote: event.value
+    }
+    this.store.dispatch( updateCountryVote( payload));
   }
 
 }
