@@ -18,21 +18,28 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./relay-your-conflicts.component.scss']
 })
 export class RelayYourConflictsComponent implements OnInit, OnDestroy {
-  unsure: boolean = false;
-  unsureForm: FormGroup;
   partyMembers$: Observable<string[]>;
-  partyMembersSub: Subscription;
+
+  unsure: boolean = false;
+  fyi: boolean = false;
+  invalidDate: boolean = false;
+
   partySize: number;
   optOutPartyMembersStr: string = '';
-  fyi: boolean = false;
-  minKnowByDate = new Date();
-  minDate = new Date();
-  maxDate = new Date(2020, 2, 21);
-  knowByDateSub: Subscription;
   calendarHash = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
-  conflictCount: number = 1;
+  currentDate = new Date();
+  minDate = new Date(2020, 6, 1);
+  maxDate = new Date(2020, 8, 30);
+  errorMessage: string = null;
+  errorMessageOptOut: string = null;
 
-  @Output() conflictCounter = new EventEmitter<number>();
+  unsureForm: FormGroup;
+  partyMembersSub: Subscription;
+  knowByDateSub: Subscription;
+  conflictsSub: Subscription;
+
+  @Output() invalidForm = new EventEmitter<boolean>();
+  @Output() conflictsArray = new EventEmitter<any>();
   @Input() parentForm: FormGroup;
     /* Parent Form:
 
@@ -46,7 +53,6 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
       'conflicts': new FormArray([this.conflictGroup])
     });
 
-    this.parentForm.get('firstCtrl').valueChanges.subscribe(newVal => console.log(newVal));
     */
   
   constructor(private store: Store<AppState>) {}
@@ -57,17 +63,53 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
       'elaboration': new FormControl(null),
       'knowByDate': new FormControl(null),
     });
+
     this.partyMembers$ = this.store.pipe( select( getPartyMembers ));
+
     this.partyMembersSub = this.partyMembers$.subscribe( party => {
       this.partySize = party.length;
     });
+
     this.knowByDateSub = this.unsureForm.get('knowByDate').valueChanges.subscribe( date => {
-      let dateArray = this.getDateArray(date);
-      let payload = {
-        knowByDate: dateArray
+      if(date !== null) {
+        let dateArray = this.getDateArray(date);
+        let payload = {
+          knowByDate: dateArray
+        }
+        this.store.dispatch( updateOptOutKnowByDate( payload));
       }
-      this.store.dispatch( updateOptOutKnowByDate( payload));
-    })
+    });
+
+    this.conflictsSub = (<FormArray>this.parentForm.get('conflicts')).valueChanges.subscribe( conflicts => {
+      this.errorMessage = null;
+      for(let i = 0; i < conflicts.length; i++) {
+        if(conflicts[i].startsOnDate !== null && conflicts[i].endsOnDate !== null) {
+          if(conflicts[i].startsOnDate < this.currentDate  || conflicts[i].endsOnDate < this.currentDate) {
+            this.errorMessage = "One or more of the dates given on row " + (i+1) + " occur prior to the current date.";
+            this.invalidDate = true;
+            this.invalidForm.emit(this.invalidDate);
+            break;
+          }
+          else if(conflicts[i].startsOnDate > conflicts[i].endsOnDate) {
+            this.errorMessage = "The end date given on row " + (i+1) + " occurs before the start date.";
+            this.invalidDate = true;
+            this.invalidForm.emit(this.invalidDate);
+            break;
+          }
+          else {
+            this.invalidDate = false;
+            this.invalidForm.emit(this.invalidDate);
+            this.conflictsArray.emit(conflicts);
+          }
+        }
+        else {
+          this.errorMessage = "Row " + (i+1) + " contains at least one empty or invalid date. Fill in the date or remove that row.";
+          this.invalidDate = true;
+          this.invalidForm.emit(this.invalidDate);
+          break;
+        }
+      }
+    });
   }
 
   getDateArray(date: Date) {
@@ -124,18 +166,15 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
       'endsOnDate': new FormControl(null)
     });
     (<FormArray>this.parentForm.get('conflicts')).push(conflictGroup);
-    this.conflictCount = this.conflictCount + 1;
-    this.conflictCounter.emit(this.conflictCount);
-    console.log((<FormArray>this.parentForm.get('conflicts')).value);
   }
 
   removeConflict(i: number) {
     (<FormArray>this.parentForm.get('conflicts')).removeAt(i);
-    this.conflictCount = this.conflictCount - 1;
-    this.conflictCounter.emit(this.conflictCount);
   }
 
   ngOnDestroy() {
     this.partyMembersSub.unsubscribe();
+    this.knowByDateSub.unsubscribe();
+    this.conflictsSub.unsubscribe();
   }
 }
