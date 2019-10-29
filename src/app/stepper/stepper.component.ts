@@ -59,7 +59,7 @@ export class StepperComponent implements OnInit {
     return [ this.calendarHash[dateArray[1]], dateArray[2], dateArray[3] ];
   }
 
-  updateConflictsArray(conflictsArray: any) {
+  getConflictsArray(conflictsArray: any) {
     this.conflictsArray = conflictsArray;
   }
 
@@ -68,11 +68,10 @@ export class StepperComponent implements OnInit {
   }
 
   stepChange(event: any) {
-    if (event.previouslySelectedIndex == 0) {
+    if (event.previouslySelectedIndex == 2) {
       this.conflictsArray.forEach( conflict => {
         conflict.startsOnDate = this.getDateArray(conflict.startsOnDate);
         conflict.endsOnDate = this.getDateArray(conflict.endsOnDate);
-        console.log(conflict);
       });
       if(this.conflictsArray.length !== 0) {
         const payload = {

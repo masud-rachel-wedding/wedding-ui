@@ -84,14 +84,20 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
       this.errorMessage = null;
       for(let i = 0; i < conflicts.length; i++) {
         if(conflicts[i].startsOnDate !== null && conflicts[i].endsOnDate !== null) {
-          if(conflicts[i].startsOnDate < this.currentDate  || conflicts[i].endsOnDate < this.currentDate) {
-            this.errorMessage = "One or more of the dates given on row " + (i+1) + " occur prior to the current date.";
+          if(conflicts[i].startsOnDate < this.minDate || conflicts[i].startsOnDate > this.maxDate) {
+            this.errorMessage = "The start date given in row " + (i+1) + " is outside the specified timeframe (July - September 2020)."
+            this.invalidDate = true;
+            this.invalidForm.emit(this.invalidDate);
+            break;
+          }
+          else if(conflicts[i].endsOnDate < this.minDate || conflicts[i].endsOnDate > this.maxDate) {
+            this.errorMessage = "The start date given in row " + (i+1) + " is outside the specified timeframe (July - September 2020)."
             this.invalidDate = true;
             this.invalidForm.emit(this.invalidDate);
             break;
           }
           else if(conflicts[i].startsOnDate > conflicts[i].endsOnDate) {
-            this.errorMessage = "The end date given on row " + (i+1) + " occurs before the start date.";
+            this.errorMessage = "The end date given in row " + (i+1) + " occurs before the start date.";
             this.invalidDate = true;
             this.invalidForm.emit(this.invalidDate);
             break;
@@ -103,7 +109,12 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
           }
         }
         else {
-          this.errorMessage = "Row " + (i+1) + " contains at least one empty or invalid date. Fill in the date or remove that row.";
+          if(conflicts[i].startsOnDate === null) {
+            this.errorMessage = "Don't forget to put a valid start date in row " + (i+1) +"!";
+          }
+          else {
+            this.errorMessage = "Don't forget to put a valid end date in row " + (i+1) +"!";
+          }
           this.invalidDate = true;
           this.invalidForm.emit(this.invalidDate);
           break;

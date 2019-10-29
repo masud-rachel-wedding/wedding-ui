@@ -36,7 +36,8 @@ const initialState: State = {
   partyMembersInfo: [
     { name: 'Nila Bala', coming: null, maybe: null, probablyNot: null },
     { name: 'Mukie Ramkumar', coming: null, maybe: null, probablyNot: null },
-    { name: 'Baby Shankur', coming: null, maybe: null, probablyNot: null }
+    { name: 'Baby Shankur', coming: null, maybe: null, probablyNot: null },
+    { name: 'Baby Sharktooth', coming: null, maybe: null, probablyNot: null }
   ],
   partyMembersElaboration: null,
   optOutPartyMembers: null,
@@ -91,6 +92,7 @@ export function Reducer(state: State | undefined, payload: Action) {
     }),
 
     on( updateConflictsArray, (state, payload) => {
+      console.log(payload.conflictsArray);
       return { ...state, conflictsArray: payload.conflictsArray };
     }),
 
