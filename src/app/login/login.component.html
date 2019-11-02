@@ -2,19 +2,16 @@
 <div align="right">
   <span class="mr-3"><i style="font-size:105%">Hvar Town, Croatia</i></span>
 </div>
-
 <div class="flex-column align-items-center">
   <h1>Sign In</h1>
+  <p style="font-size:105%">We sent you a code! Please enter it below.</p>
     <form [formGroup]="signInForm">
       <div *ngIf="!showSpinner" class="flex-column align-items-center">
-        <mat-form-field>
-          <input matInput formControlName="username" placeholder="Username" required>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput formControlName="password" placeholder="Password" type="password" required>
+        <mat-form-field style="width:100%">
+          <input matInput formControlName="code" placeholder="Enter your code here" required>
         </mat-form-field>
         <button mat-raised-button type="submit" (click)="login()" class="mt-2" color="primary">
-          Login
+          Submit
         </button>
       </div>
     </form>

@@ -22,15 +22,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.signInForm = new FormGroup({
-      'username': new FormControl("", Validators.required),
-      'password': new FormControl("", Validators.required)
+      'code': new FormControl("", Validators.required),
     });
   }
 
   login() {
     let payload = {
-      username: this.signInForm.get('username').value,
-      password: this.signInForm.get('password').value
+      code: this.signInForm.get('code').value,
     }
 
     /* API CALL */
