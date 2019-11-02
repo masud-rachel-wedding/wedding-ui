@@ -5,7 +5,9 @@
 
 <div *ngIf="!rsvpComplete">
   <mat-horizontal-stepper #stepper [linear]="isLinear" (selectionChange)="stepChange($event)">
-
+  
+    <ng-template matStepperIcon="edit" let-index="index">{{index+1}}</ng-template>
+    
     <!-- Our Vision -->
     <mat-step>
       <ng-template matStepLabel>You're Invited!</ng-template>

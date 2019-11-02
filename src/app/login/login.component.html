@@ -4,13 +4,13 @@
 </div>
 <div class="flex-column align-items-center">
   <h1>Sign In</h1>
-  <p style="font-size:105%">We sent you a code! Please enter it below.</p>
+  <span style="font-size:105%">We sent you a code! Please enter it below.</span>
     <form [formGroup]="signInForm">
       <div *ngIf="!showSpinner" class="flex-column align-items-center">
-        <mat-form-field style="width:100%">
+        <mat-form-field style="font-size:105%;width:100%">
           <input matInput formControlName="code" placeholder="Enter your code here" required>
         </mat-form-field>
-        <button mat-raised-button type="submit" (click)="login()" class="mt-2" color="primary">
+        <button mat-raised-button type="submit" style="font-size:120%" (click)="login()" class="mt-2" color="primary">
           Submit
         </button>
       </div>
