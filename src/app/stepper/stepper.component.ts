@@ -43,10 +43,14 @@ export class StepperComponent implements OnInit {
       'conflicts': new FormArray([this.conflictGroup])
     });
     this.questionnaire = new FormGroup({
-      'preference': new FormControl( null, Validators.required) 
-    });
+      'stayWith': new FormControl(null, Validators.required),
+      'needQuiet': new FormControl(null, Validators.required),
+      'wholeTime': new FormControl(null, Validators.required),
+      'rentalCar': new FormControl(null, Validators.required),
+      'changedLocation': new FormControl(null, Validators.required),
+      'generalComment': new FormControl(null)    });
     this.rsvpInfo = new FormGroup({
-      'done': new FormControl( null, Validators.required )
+      'done': new FormControl(null, Validators.required)
     });
   }
 

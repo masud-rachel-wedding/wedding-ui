@@ -6,16 +6,16 @@
 <mat-horizontal-stepper #stepper [linear]="isLinear" (selectionChange)="stepChange($event)">
 
   <!-- Our Vision -->
-  <mat-step>
+  <!-- <mat-step>
     <ng-template matStepLabel>You're Invited!</ng-template>
     <app-our-vision></app-our-vision>
     <div class="flex-row justify-content-center mt-5">
       <button mat-raised-button color="primary" matStepperNext style="font-size:130%">Next</button>
     </div>
-  </mat-step>
+  </mat-step> -->
 
   <!-- Who's In? -->
-  <mat-step [stepControl]="identifyYourParty">
+  <!-- <mat-step [stepControl]="identifyYourParty">
     <form [formGroup]="identifyYourParty">
       <ng-template matStepLabel>Who's In?</ng-template>
       <app-identify-your-party [parentForm]="identifyYourParty"></app-identify-your-party>
@@ -24,11 +24,10 @@
         <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
       </div>
     </form>
-  </mat-step>
+  </mat-step> -->
 
   <!-- Tell us your Dates -->
-    <mat-step [completed]="isCompleted">
-    <!-- <form [formGroup]="relayConflicts" #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)"> -->
+  <!-- <mat-step [completed]="isCompleted">
     <form [formGroup]="relayConflicts">
       <ng-template matStepLabel>Tell Us Your Dates</ng-template>
       <app-relay-your-conflicts [parentForm]="relayConflicts" (invalidForm)="statusChange($event)" (conflictsArray)="getConflictsArray($event)"></app-relay-your-conflicts>
@@ -37,13 +36,18 @@
         <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
       </div>
     </form>
-  </mat-step>
+  </mat-step> -->
 
   <!-- Quick Questionnaire -->
   <mat-step [stepControl]="questionnaire">
+    <!-- <form [formGroup]="questionnaire" #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)> -->
     <form [formGroup]="questionnaire">
       <ng-template matStepLabel>Quick Questionnaire</ng-template>
       <app-questionnaire [parentForm]="questionnaire"></app-questionnaire>
+      <div class="flex-row justify-content-center mt-2">
+        <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
+        <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
+      </div>
     </form>
   </mat-step>
 

@@ -1,7 +1,49 @@
-<mat-form-field [formGroup]="parentForm">
-  <input matInput formControlName="preference" placeholder="Last name, First name">
-</mat-form-field>
-<div>
-  <button mat-button matStepperPrevious>Back</button>
-  <button mat-button matStepperNext>Next</button>
+<h1 class="flex-row justify-content-center">Quick Questionnaire</h1>
+<p class="mt-3 mb-5" style="margin-left:50px;margin-right:50px;text-align:center">
+    You're almost done!
+</p>
+<div [formGroup]="parentForm">
+  <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
+    Are you interested in staying with us in the house that we rent or would you rather find your own accommodation nearby?
+  </p>
+  <mat-radio-group class="flex-row justify-content-center mb-6" formControlName="stayWith">
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">"Stay with you guys!"</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="no">"I'll find my/our own place."</mat-radio-button>
+  </mat-radio-group>
+  <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
+    Will you need a quiet space in order to get to bed early on most nights?
+  </p>
+  <mat-radio-group class="flex-row justify-content-center mb-6" formControlName="needQuiet">
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">yes</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="no">no</mat-radio-button>
+  </mat-radio-group>
+  <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
+    Do you think you'll be able to come out for the whole week that we're there, or at least for 80% of the time?
+  </p>
+  <mat-radio-group class="flex-row justify-content-center mb-6" formControlName="wholeTime">
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">yes</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="no">no</mat-radio-button>
+  </mat-radio-group>
+  <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
+    Depending on the location we choose, we may have to use rental cars. Would you be comfortable going in on a rental car with another party?
+  </p>
+  <mat-radio-group class="flex-row justify-content-center mb-6" formControlName="rentalCar">
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">yes</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="no">no</mat-radio-button>
+  </mat-radio-group>
+  <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
+    Although Croatia and Greece are our top choices, depending on how many people RSVP, we may have to change the location if we have trouble finding
+    accommodations. Would it be okay with you if that were the case? We can promise a similar, zika-free, beach destination (i.e. Bulgaria, Italy,
+    Malta, Spain, etc.).
+  </p>
+  <mat-radio-group class="flex-row justify-content-center mb-4" formControlName="changedLocation">
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">yes</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="no">no</mat-radio-button>
+  </mat-radio-group>
+  <div class="flex-column align-items-center mb-4">
+    <mat-form-field appearance="outline" style="width:65%">
+      <mat-label>If the questionnaire doesn't capture everything you want to say, feel free to elaborate here.</mat-label>
+      <textarea matInput formControlName="generalComment" (blur)="saveElaboration()" rows="5" class="dark-outline" style="font-size:85%"></textarea>
+    </mat-form-field>
+  </div>
 </div>
