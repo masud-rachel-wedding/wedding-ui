@@ -4,6 +4,8 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
+import { HttpClientModule } from '@angular/common/http'
+
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from "@angular/material/stepper";
@@ -43,6 +45,7 @@ import { SubmitRsvpComponent } from './stepper/submit-rsvp/submit-rsvp.component
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({ reducer: Reducer }),
+    HttpClientModule,
     MatCardModule,
     MatProgressSpinnerModule,
     MatStepperModule,

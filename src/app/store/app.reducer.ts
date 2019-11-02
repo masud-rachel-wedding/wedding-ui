@@ -77,7 +77,7 @@ export function Reducer(state: State | undefined, payload: Action) {
     initialState,
 
     on( login, (state, payload) => {
-      return { ...state, code: payload.code };
+      return { ...state, code: payload.code, partyMembers: payload.partyMembers };
     }),
 
     on( updateCountryVote, (state, payload) => {
