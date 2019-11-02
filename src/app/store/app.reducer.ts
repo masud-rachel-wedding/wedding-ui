@@ -7,7 +7,8 @@ import {
   updateOptOutElaboration,
   updateOptOutKnowByDate,
   updateCountryVote,
-  updateConflictsArray
+  updateConflictsArray,
+  updateQuestionnaire
 }from './app.actions';
 import { PartyMemberRow } from './app.index'
 
@@ -26,6 +27,14 @@ export interface State {
   optOutElaboration: string;
   optOutKnowByDate: string[];
   conflictsArray: any[];
+  questionnaire: {
+    stayWith: string,
+    needQuiet: string,
+    wholeTime: string,
+    rentalCar: string,
+    changedLocation: string,
+    generalComment: string
+  };
 };
 
 const initialState: State = {
@@ -43,7 +52,15 @@ const initialState: State = {
   optOutPartyMembers: null,
   optOutElaboration: null,
   optOutKnowByDate: null,
-  conflictsArray: []
+  conflictsArray: [],
+  questionnaire: {
+    stayWith: null,
+    needQuiet: null,
+    wholeTime: null,
+    rentalCar: null,
+    changedLocation: null,
+    generalComment: null
+  }
 };
  
 export function Reducer(state: State | undefined, payload: Action) {
@@ -96,6 +113,16 @@ export function Reducer(state: State | undefined, payload: Action) {
       return { ...state, conflictsArray: payload.conflictsArray };
     }),
 
-        
+    on( updateQuestionnaire, (state, payload) => {
+      let question = {};
+      question[payload.question] = payload.response;
+
+      let questionnaire = {
+        ...state.questionnaire,
+        ...question
+      }
+      return { ...state, questionnaire }
+    })
+
   )(state, payload);
 }
