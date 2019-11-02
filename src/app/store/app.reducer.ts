@@ -8,7 +8,8 @@ import {
   updateOptOutKnowByDate,
   updateCountryVote,
   updateConflictsArray,
-  updateQuestionnaire
+  updateQuestionnaire,
+  updateSubmitResult
 }from './app.actions';
 
 export interface AppState {
@@ -39,6 +40,7 @@ export interface State {
     changedLocation: string,
     generalComment: string
   };
+  submitResult: boolean
 };
 
 const initialState: State = {
@@ -69,7 +71,8 @@ const initialState: State = {
     rentalCar: null,
     changedLocation: null,
     generalComment: null
-  }
+  },
+  submitResult: null
 };
  
 export function Reducer(state: State | undefined, payload: Action) {
@@ -168,6 +171,10 @@ export function Reducer(state: State | undefined, payload: Action) {
         ...question
       }
       return { ...state, questionnaire }
+    }),
+
+    on( updateSubmitResult, (state, payload) => {
+      return { ...state, submitResult: payload.result }
     })
 
   )(state, payload);

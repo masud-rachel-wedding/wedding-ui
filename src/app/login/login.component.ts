@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.showSpinner = true;
     const loginCode = this.signInForm.get('code').value;
-    let postData = {
+    let body = {
       code: loginCode
     }
-    this.http.post<{result: boolean, partyMembers?: string[]}>(this.url, postData).subscribe( response => {
+    this.http.post<{result: boolean, partyMembers?: string[]}>(this.url, body).subscribe( response => {
       this.loginError = false;
       this.showSpinner = false;
       if(response.result) {

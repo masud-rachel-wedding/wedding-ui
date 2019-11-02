@@ -7,8 +7,7 @@ import {
 } from "@angular/forms";
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
-import { updateConflictsArray } from '../store/app.actions';
-import { Subscription, timer } from 'rxjs';
+import { updateConflictsArray, submitRSVP } from '../store/app.actions';
 
 @Component({
   selector: 'app-stepper',
@@ -26,8 +25,6 @@ export class StepperComponent implements OnInit {
   conflictGroup2: FormGroup;
   relayConflicts: FormGroup;
   questionnaire: FormGroup;
-
-  intervalSubscription: Subscription;
 
   conflictsArray: any[] = [];
   calendarHash = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
@@ -89,13 +86,10 @@ export class StepperComponent implements OnInit {
     }
   }
 
-  submitRSVP() {
-    console.log('form submitted');
+  submit() {
     this.showSpinner = true;
-    this.intervalSubscription = timer(1000).subscribe( val => {
-      //this.store.dispatch( login(payload));
-      this.rsvpComplete = true;
-      this.showSpinner = false;
-    });
+    this.store.dispatch( submitRSVP());
+    this.rsvpComplete = true;
+    this.showSpinner = false;
   }
 }
