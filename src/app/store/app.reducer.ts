@@ -7,9 +7,9 @@ import {
   updateOptOutElaboration,
   updateOptOutKnowByDate,
   updateCountryVote,
-  updateConflictsArray
+  updateConflictsArray,
+  updateQuestionnaire
 }from './app.actions';
-import { PartyMemberRow } from './app.index'
 
 export interface AppState {
   reducer: State
@@ -20,12 +20,26 @@ export interface State {
   password: string;
   countryVote: string;
   partyMembers: string[];
-  partyMembersInfo: PartyMemberRow[];
-  partyMembersElaboration: string;
-  optOutPartyMembers: string[];
-  optOutElaboration: string;
-  optOutKnowByDate: string[];
-  conflictsArray: any[];
+  party: {
+    members: { name: string, status: string }[];
+    elaboration: string;
+  };
+  conflicts: {
+    conflictsArray: any[];
+    conflictsOptOut: {
+      partyMembers: string[];
+      elaboration: string;
+      knowByDate: string[];
+    };
+  };
+  questionnaire: {
+    stayWith: string,
+    needQuiet: string,
+    wholeTime: string,
+    rentalCar: string,
+    changedLocation: string,
+    generalComment: string
+  };
 };
 
 const initialState: State = {
@@ -33,17 +47,31 @@ const initialState: State = {
   password: null,
   countryVote: null,
   partyMembers: ['Nila Bala', 'Mukie Ramkumar', 'Baby Shankur', 'Baby Sharktooth'],
-  partyMembersInfo: [
-    { name: 'Nila Bala', coming: null, maybe: null, probablyNot: null },
-    { name: 'Mukie Ramkumar', coming: null, maybe: null, probablyNot: null },
-    { name: 'Baby Shankur', coming: null, maybe: null, probablyNot: null },
-    { name: 'Baby Sharktooth', coming: null, maybe: null, probablyNot: null }
-  ],
-  partyMembersElaboration: null,
-  optOutPartyMembers: null,
-  optOutElaboration: null,
-  optOutKnowByDate: null,
-  conflictsArray: []
+  party: {
+    members: [
+      { name: 'Nila Bala', status: null },
+      { name: 'Mukie Ramkumar', status: null },
+      { name: 'Baby Shankur', status: null },
+      { name: 'Baby Sharktooth', status: null }
+    ],
+    elaboration: null,
+  },
+  conflicts: {
+    conflictsArray: [],
+    conflictsOptOut: {
+      partyMembers: [],
+      elaboration: null,
+      knowByDate: [],
+    }
+  },
+  questionnaire: {
+    stayWith: null,
+    needQuiet: null,
+    wholeTime: null,
+    rentalCar: null,
+    changedLocation: null,
+    generalComment: null
+  }
 };
  
 export function Reducer(state: State | undefined, payload: Action) {
@@ -62,40 +90,87 @@ export function Reducer(state: State | undefined, payload: Action) {
       const guestStatusArray = [ 'coming', 'maybe', 'probablyNot' ];
       const { guestStatus } = payload;
       const { guestIdx } = payload;
-      let partyMembersInfo = [ ...state.partyMembersInfo ];
-      let partyMemberRow = partyMembersInfo[guestIdx];
+      let members = [ ...state.party.members ];
+      let member = members[guestIdx];
+
       guestStatusArray.forEach( status => {
         if (guestStatus === status) {
-          partyMemberRow[status] = true;
-        } else {
-          partyMemberRow[status] = false;
+          member.status= status;
         }
       });
-      partyMembersInfo[guestIdx] = partyMemberRow;
-      return { ...state, partyMembersInfo };
+
+      members[guestIdx] = member;
+      let party = {
+        ...state.party,
+        members
+      };
+
+      return { ...state, party };
     }),
 
     on( updatePartyMembersElaboration, (state, payload) => {
-      return { ...state, partyMembersElaboration: payload.elaboration };
+      let party = {
+        ...state.party,
+        elaboration: payload.elaboration
+      };
+      return { ...state, party };
     }),
 
     on( updateOptOutPartyMembers, (state, payload) => {
-      return { ...state, optOutPartyMembers: payload.optOutPartyMembers };
+      let conflictsOptOut = {
+        ...state.conflicts.conflictsOptOut,
+        partyMembers: payload.optOutPartyMembers
+      }
+      let conflicts = {
+        ...state.conflicts,
+        conflictsOptOut
+      }
+      return { ...state, conflicts };
     }),
 
     on( updateOptOutElaboration, (state, payload) => {
-      return { ...state, optOutElaboration: payload.elaboration };
+      let conflictsOptOut = {
+        ...state.conflicts.conflictsOptOut,
+        elaboration: payload.elaboration
+      }
+      let conflicts = {
+        ...state.conflicts,
+        conflictsOptOut
+      }
+      return { ...state, conflicts };
     }),
     
     on( updateOptOutKnowByDate, (state, payload) => {
-      return { ...state, optOutKnowByDate: payload.knowByDate };
+      let conflictsOptOut = {
+        ...state.conflicts.conflictsOptOut,
+        knowByDate: payload.knowByDate
+      }
+      let conflicts = {
+        ...state.conflicts,
+        conflictsOptOut
+      }
+      return { ...state, conflicts };
     }),
 
     on( updateConflictsArray, (state, payload) => {
-      console.log(payload.conflictsArray);
-      return { ...state, conflictsArray: payload.conflictsArray };
+      let conflictsArray = payload.conflictsArray;
+      let conflicts = {
+        ...state.conflicts,
+        conflictsArray
+      }
+      return { ...state, conflicts };
     }),
 
-        
+    on( updateQuestionnaire, (state, payload) => {
+      let question = {};
+      question[payload.question] = payload.response;
+
+      let questionnaire = {
+        ...state.questionnaire,
+        ...question
+      }
+      return { ...state, questionnaire }
+    })
+
   )(state, payload);
 }

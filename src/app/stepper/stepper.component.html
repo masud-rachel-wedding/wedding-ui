@@ -1,4 +1,4 @@
-<img src="../../assets/images/stepper_banner.jpg" alt="Greece" class="center">
+<img src="../../assets/images/banner2.jpg" alt="Greece" class="center">
 <div align="right">
   <span class="mr-3"><i style="font-size:90%">Santorini, Greece</i></span>
 </div>
@@ -27,8 +27,7 @@
   </mat-step>
 
   <!-- Tell us your Dates -->
-    <mat-step [completed]="isCompleted">
-    <!-- <form [formGroup]="relayConflicts" #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)"> -->
+  <mat-step [completed]="isCompleted">
     <form [formGroup]="relayConflicts">
       <ng-template matStepLabel>Tell Us Your Dates</ng-template>
       <app-relay-your-conflicts [parentForm]="relayConflicts" (invalidForm)="statusChange($event)" (conflictsArray)="getConflictsArray($event)"></app-relay-your-conflicts>
@@ -41,9 +40,14 @@
 
   <!-- Quick Questionnaire -->
   <mat-step [stepControl]="questionnaire">
+    <!-- <form [formGroup]="questionnaire" #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)> -->
     <form [formGroup]="questionnaire">
       <ng-template matStepLabel>Quick Questionnaire</ng-template>
       <app-questionnaire [parentForm]="questionnaire"></app-questionnaire>
+      <div class="flex-row justify-content-center mt-2">
+        <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
+        <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
+      </div>
     </form>
   </mat-step>
 
