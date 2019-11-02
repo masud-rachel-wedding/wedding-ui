@@ -24,12 +24,14 @@ export interface State {
     members: { name: string, status: string }[];
     elaboration: string;
   };
-  conflictsOptOut: {
-    partyMembers: string[];
-    elaboration: string;
-    knowByDate: string[];
+  conflicts: {
+    conflictsArray: any[];
+    conflictsOptOut: {
+      partyMembers: string[];
+      elaboration: string;
+      knowByDate: string[];
+    };
   };
-  conflictsArray: any[];
   questionnaire: {
     stayWith: string,
     needQuiet: string,
@@ -54,12 +56,14 @@ const initialState: State = {
     ],
     elaboration: null,
   },
-  conflictsOptOut: {
-    partyMembers: null,
-    elaboration: null,
-    knowByDate: null,
+  conflicts: {
+    conflictsArray: [],
+    conflictsOptOut: {
+      partyMembers: [],
+      elaboration: null,
+      knowByDate: [],
+    }
   },
-  conflictsArray: [],
   questionnaire: {
     stayWith: null,
     needQuiet: null,
@@ -114,30 +118,47 @@ export function Reducer(state: State | undefined, payload: Action) {
 
     on( updateOptOutPartyMembers, (state, payload) => {
       let conflictsOptOut = {
-        ...state.conflictsOptOut,
+        ...state.conflicts.conflictsOptOut,
         partyMembers: payload.optOutPartyMembers
       }
-      return { ...state, conflictsOptOut };
+      let conflicts = {
+        ...state.conflicts,
+        conflictsOptOut
+      }
+      return { ...state, conflicts };
     }),
 
     on( updateOptOutElaboration, (state, payload) => {
       let conflictsOptOut = {
-        ...state.conflictsOptOut,
+        ...state.conflicts.conflictsOptOut,
         elaboration: payload.elaboration
       }
-      return { ...state, conflictsOptOut };
+      let conflicts = {
+        ...state.conflicts,
+        conflictsOptOut
+      }
+      return { ...state, conflicts };
     }),
     
     on( updateOptOutKnowByDate, (state, payload) => {
       let conflictsOptOut = {
-        ...state.conflictsOptOut,
+        ...state.conflicts.conflictsOptOut,
         knowByDate: payload.knowByDate
       }
-      return { ...state, conflictsOptOut };
+      let conflicts = {
+        ...state.conflicts,
+        conflictsOptOut
+      }
+      return { ...state, conflicts };
     }),
 
     on( updateConflictsArray, (state, payload) => {
-      return { ...state, conflictsArray: payload.conflictsArray };
+      let conflictsArray = payload.conflictsArray;
+      let conflicts = {
+        ...state.conflicts,
+        conflictsArray
+      }
+      return { ...state, conflicts };
     }),
 
     on( updateQuestionnaire, (state, payload) => {
