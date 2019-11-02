@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   FormGroup,
   Validators,
@@ -17,7 +17,7 @@ import { Subscription, timer } from 'rxjs';
 })
 export class StepperComponent implements OnInit {
   isLinear: boolean = true;
-  isCompleted: boolean = true;
+  isCompleted: boolean = false;
   showSpinner: boolean = false;
   rsvpComplete: boolean = false;
 
@@ -79,6 +79,10 @@ export class StepperComponent implements OnInit {
   }
 
   stepChange(event: any) {
+    console.log(event);
+    if (event.selectedIndex == 2 && !event.selectedStep.interacted) {
+      this.isCompleted = true;
+    }
     if (event.previouslySelectedIndex == 2) {
       this.conflictsArray.forEach( conflict => {
         conflict.startsOnDate = this.getDateArray(conflict.startsOnDate);
