@@ -10,7 +10,6 @@ import {
   updateConflictsArray,
   updateQuestionnaire
 }from './app.actions';
-import { PartyMemberRow } from './app.index'
 
 export interface AppState {
   reducer: State
@@ -21,8 +20,10 @@ export interface State {
   password: string;
   countryVote: string;
   partyMembers: string[];
-  partyMembersInfo: PartyMemberRow[];
-  partyMembersElaboration: string;
+  party: {
+    members: { name: string, status: string }[];
+    elaboration: string;
+  },
   optOutPartyMembers: string[];
   optOutElaboration: string;
   optOutKnowByDate: string[];
@@ -42,13 +43,15 @@ const initialState: State = {
   password: null,
   countryVote: null,
   partyMembers: ['Nila Bala', 'Mukie Ramkumar', 'Baby Shankur', 'Baby Sharktooth'],
-  partyMembersInfo: [
-    { name: 'Nila Bala', coming: null, maybe: null, probablyNot: null },
-    { name: 'Mukie Ramkumar', coming: null, maybe: null, probablyNot: null },
-    { name: 'Baby Shankur', coming: null, maybe: null, probablyNot: null },
-    { name: 'Baby Sharktooth', coming: null, maybe: null, probablyNot: null }
-  ],
-  partyMembersElaboration: null,
+  party: {
+    members: [
+      { name: 'Nila Bala', status: null },
+      { name: 'Mukie Ramkumar', status: null },
+      { name: 'Baby Shankur', status: null },
+      { name: 'Baby Sharktooth', status: null }
+    ],
+    elaboration: null,
+  },
   optOutPartyMembers: null,
   optOutElaboration: null,
   optOutKnowByDate: null,
@@ -79,21 +82,26 @@ export function Reducer(state: State | undefined, payload: Action) {
       const guestStatusArray = [ 'coming', 'maybe', 'probablyNot' ];
       const { guestStatus } = payload;
       const { guestIdx } = payload;
-      let partyMembersInfo = [ ...state.partyMembersInfo ];
-      let partyMemberRow = partyMembersInfo[guestIdx];
+      let members = [ ...state.party.members ];
+      let member = members[guestIdx];
+
       guestStatusArray.forEach( status => {
         if (guestStatus === status) {
-          partyMemberRow[status] = true;
-        } else {
-          partyMemberRow[status] = false;
+          member.status= status;
         }
       });
-      partyMembersInfo[guestIdx] = partyMemberRow;
-      return { ...state, partyMembersInfo };
+
+      members[guestIdx] = member;
+      let party = {
+        ...state.party,
+        members
+      }
+      
+      return { ...state, party };
     }),
 
     on( updatePartyMembersElaboration, (state, payload) => {
-      return { ...state, partyMembersElaboration: payload.elaboration };
+      return { ...state, partyElaboration: payload.elaboration };
     }),
 
     on( updateOptOutPartyMembers, (state, payload) => {
