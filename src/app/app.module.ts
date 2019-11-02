@@ -26,7 +26,6 @@ import { OurVisionComponent } from './stepper/our-vision/our-vision.component';
 import { IdentifyYourPartyComponent } from './stepper/identify-your-party/identify-your-party.component';
 import { RelayYourConflictsComponent } from './stepper/relay-your-conflicts/relay-your-conflicts.component';
 import { QuestionnaireComponent } from './stepper/questionnaire/questionnaire.component';
-import { SubmitRsvpComponent } from './stepper/submit-rsvp/submit-rsvp.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,7 @@ import { SubmitRsvpComponent } from './stepper/submit-rsvp/submit-rsvp.component
     OurVisionComponent,
     IdentifyYourPartyComponent,
     RelayYourConflictsComponent,
-    QuestionnaireComponent,
-    SubmitRsvpComponent,
+    QuestionnaireComponent
   ],
   imports: [
     BrowserModule,

@@ -26,7 +26,6 @@ export class StepperComponent implements OnInit {
   conflictGroup2: FormGroup;
   relayConflicts: FormGroup;
   questionnaire: FormGroup;
-  rsvpInfo: FormGroup;
 
   intervalSubscription: Subscription;
 
@@ -56,13 +55,6 @@ export class StepperComponent implements OnInit {
       'rentalCar': new FormControl(null, Validators.required),
       'changedLocation': new FormControl(null, Validators.required),
       'generalComment': new FormControl(null)    });
-    this.rsvpInfo = new FormGroup({
-      'done': new FormControl(null, Validators.required)
-    });
-  }
-
-  onSubmit(event: any) {
-    console.log(event);
   }
 
   getDateArray(date: Date) {

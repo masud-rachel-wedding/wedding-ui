@@ -56,7 +56,10 @@
     <!-- Submit RSVP -->
     <mat-step>
       <ng-template matStepLabel>Submit RSVP</ng-template>
-      <app-submit-rsvp [parentForm]="rsvpInfo"></app-submit-rsvp>
+      <h1 class="flex-row justify-content-center">Submit Your RSVP</h1>
+      <p class="mt-3 mb-5" style="margin-left:50px;margin-right:50px;text-align:center">
+        We appreciate you taking the time to fill out our RSVP! If you feel good about your answers, feel free to submit them now.
+      </p>
       <div class="flex-row justify-content-center mt-2">
         <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
         <button mat-raised-button color="primary" type="button" (click)="submitRSVP()" class="ml-3" style="font-size:130%">Submit RSVP</button>

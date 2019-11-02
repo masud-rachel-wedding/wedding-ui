@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription, timer } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
 import { login } from '../store/app.actions';
@@ -11,12 +10,13 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   signInForm: FormGroup;
+
   showSpinner: boolean = false;
   loginFail: boolean = false;
   loginError: boolean = false;
-  intervalSubscription: Subscription;
+
   url: string = '';
   error: string = '';
 
@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     this.showSpinner = true;
+    const loginCode = this.signInForm.get('code').value;
     let postData = {
-      code: this.signInForm.get('code').value,
+      code: loginCode
     }
     this.http.post<{result: boolean, partyMembers?: string[]}>(this.url, postData).subscribe( response => {
       this.loginError = false;
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       if(response.result) {
         this.loginFail = false;
         const payload = {
-          code: this.signInForm.get('code').value,
+          code: loginCode,
           partyMembers: response.partyMembers
         }
         this.store.dispatch( login(payload));
@@ -56,9 +57,5 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.error = error.message;
       this.loginError = true;
     });
-  }
-
-  ngOnDestroy() {
-    this.intervalSubscription.unsubscribe();
   }
 }
