@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import {
   FormGroup,
   Validators,
@@ -8,6 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
 import { updateConflictsArray } from '../store/app.actions';
+import { Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-stepper',
@@ -17,12 +18,18 @@ import { updateConflictsArray } from '../store/app.actions';
 export class StepperComponent implements OnInit {
   isLinear: boolean = true;
   isCompleted: boolean = true;
+  showSpinner: boolean = false;
+  rsvpComplete: boolean = false;
+
   identifyYourParty: FormGroup;
   conflictGroup: FormGroup;
   conflictGroup2: FormGroup;
   relayConflicts: FormGroup;
   questionnaire: FormGroup;
   rsvpInfo: FormGroup;
+
+  intervalSubscription: Subscription;
+
   conflictsArray: any[] = [];
   calendarHash = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
 
@@ -84,5 +91,15 @@ export class StepperComponent implements OnInit {
         this.store.dispatch( updateConflictsArray( payload));
       }
     }
+  }
+
+  submitRSVP() {
+    console.log('form submitted');
+    this.showSpinner = true;
+    this.intervalSubscription = timer(1000).subscribe( val => {
+      //this.store.dispatch( login(payload));
+      this.rsvpComplete = true;
+      this.showSpinner = false;
+    });
   }
 }

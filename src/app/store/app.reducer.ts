@@ -16,8 +16,7 @@ export interface AppState {
 }
 
 export interface State {
-  username: string;
-  password: string;
+  code: string;
   countryVote: string;
   partyMembers: string[];
   party: {
@@ -43,8 +42,7 @@ export interface State {
 };
 
 const initialState: State = {
-  username: null,
-  password: null,
+  code: null,
   countryVote: null,
   partyMembers: ['Nila Bala', 'Mukie Ramkumar', 'Baby Shankur', 'Baby Sharktooth'],
   party: {
@@ -79,7 +77,7 @@ export function Reducer(state: State | undefined, payload: Action) {
     initialState,
 
     on( login, (state, payload) => {
-      return { ...state, username: payload.username, password: payload.password };
+      return { ...state, code: payload.code };
     }),
 
     on( updateCountryVote, (state, payload) => {

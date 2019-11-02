@@ -6,30 +6,38 @@
   <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
     Are you interested in staying with us in the house that we rent or would you rather find your own accommodation nearby?
   </p>
-  <mat-radio-group class="flex-row justify-content-center mb-6" formControlName="stayWith">
+  <mat-radio-group class="flex-row justify-content-center" formControlName="stayWith">
     <mat-radio-button class="mr-4" style="font-size:115%" value="yes">"Stay with you guys!"</mat-radio-button>
-    <mat-radio-button style="font-size:115%" value="no">"I'll find my/our own place."</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="no">"I'll find my/our own place."</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="not coming">"Not coming."</mat-radio-button>
   </mat-radio-group>
-  <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
-    Will you need a quiet space in order to get to bed early on most nights?
+  <mat-error *ngIf="stayWithYes" class="mt-2" style="margin-left:90px;margin-right:90px;font-size:115%;text-align:center">
+    *Note to guests with early bedtimes or children: The main house could be a little noisy in the evenings!
+  </mat-error>
+  <p class="mt-6" style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
+    Will you or anyone in your party need a quiet space in order to get to bed early on most nights?
   </p>
   <mat-radio-group class="flex-row justify-content-center mb-6" formControlName="needQuiet">
-    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">yes</mat-radio-button>
-    <mat-radio-button style="font-size:115%" value="no">no</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">Yes</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="no">No</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="not coming">Not coming</mat-radio-button>
   </mat-radio-group>
   <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
-    Do you think you'll be able to come out for the whole week that we're there, or at least for 80% of the time?
+    Do you think you'll be able to come out for the whole week that we're there, or for at least 80% of the time?
   </p>
   <mat-radio-group class="flex-row justify-content-center mb-6" formControlName="wholeTime">
-    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">yes</mat-radio-button>
-    <mat-radio-button style="font-size:115%" value="no">no</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">Yes</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="no">No</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="not coming">Not coming</mat-radio-button>
+
   </mat-radio-group>
   <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
     Depending on the location we choose, we may have to use rental cars. Would you be comfortable going in on a rental car with another party?
   </p>
   <mat-radio-group class="flex-row justify-content-center mb-6" formControlName="rentalCar">
-    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">yes</mat-radio-button>
-    <mat-radio-button style="font-size:115%" value="no">no</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">Yes</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="no">No</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="not coming">Not coming</mat-radio-button>
   </mat-radio-group>
   <p style="margin-left:90px;margin-right:90px;font-size:125%;text-align:center">
     Although Croatia and Greece are our top choices, depending on how many people RSVP, we may have to change the location if we have trouble finding
@@ -37,8 +45,9 @@
     Malta, Spain, etc.).
   </p>
   <mat-radio-group class="flex-row justify-content-center mb-4" formControlName="changedLocation">
-    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">yes</mat-radio-button>
-    <mat-radio-button style="font-size:115%" value="no">no</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="yes">Yes</mat-radio-button>
+    <mat-radio-button class="mr-4" style="font-size:115%" value="no">No</mat-radio-button>
+    <mat-radio-button style="font-size:115%" value="not coming">Not coming</mat-radio-button>
   </mat-radio-group>
   <div class="flex-column align-items-center mb-4">
     <mat-form-field appearance="outline" style="width:65%">

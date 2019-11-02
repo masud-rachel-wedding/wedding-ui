@@ -33,7 +33,6 @@ export class IdentifyYourPartyComponent implements OnInit, OnDestroy {
     this.partyMembers$ = this.store.pipe( select( getPartyMembers ));
     this.partyMembersSub = this.partyMembers$.subscribe( partyMembers => {
       partyMembers.forEach( member => {
-        console.log(member);
         this.partyMembers.push(member);
         const control = new FormControl( null, Validators.required );
         (<FormArray>this.parentForm.get('partyMembersInfo')).push(control);
