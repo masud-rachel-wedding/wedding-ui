@@ -3,60 +3,71 @@
   <span class="mr-3"><i style="font-size:90%">Santorini, Greece</i></span>
 </div>
 
-<mat-horizontal-stepper #stepper [linear]="isLinear" (selectionChange)="stepChange($event)">
+<div *ngIf="!rsvpComplete">
+  <mat-horizontal-stepper #stepper [linear]="isLinear" (selectionChange)="stepChange($event)">
 
-  <!-- Our Vision -->
-  <mat-step>
-    <ng-template matStepLabel>You're Invited!</ng-template>
-    <app-our-vision></app-our-vision>
-    <div class="flex-row justify-content-center mt-5">
-      <button mat-raised-button color="primary" matStepperNext style="font-size:130%">Next</button>
-    </div>
-  </mat-step>
-
-  <!-- Who's In? -->
-  <mat-step [stepControl]="identifyYourParty">
-    <form [formGroup]="identifyYourParty">
-      <ng-template matStepLabel>Who's In?</ng-template>
-      <app-identify-your-party [parentForm]="identifyYourParty"></app-identify-your-party>
-      <div class="flex-row justify-content-center mt-2">
-        <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
-        <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
+    <!-- Our Vision -->
+    <mat-step>
+      <ng-template matStepLabel>You're Invited!</ng-template>
+      <app-our-vision></app-our-vision>
+      <div class="flex-row justify-content-center mt-5">
+        <button mat-raised-button color="primary" matStepperNext style="font-size:130%">Next</button>
       </div>
-    </form>
-  </mat-step>
+    </mat-step>
 
-  <!-- Tell us your Dates -->
-  <mat-step [completed]="isCompleted">
-    <form [formGroup]="relayConflicts">
-      <ng-template matStepLabel>Tell Us Your Dates</ng-template>
-      <app-relay-your-conflicts [parentForm]="relayConflicts" (invalidForm)="statusChange($event)" (conflictsArray)="getConflictsArray($event)"></app-relay-your-conflicts>
-      <div class="flex-row justify-content-center mt-4">
-        <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
-        <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
-      </div>
-    </form>
-  </mat-step>
-
-  <!-- Quick Questionnaire -->
-  <mat-step [stepControl]="questionnaire">
-    <!-- <form [formGroup]="questionnaire" #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)> -->
-    <form [formGroup]="questionnaire">
-      <ng-template matStepLabel>Quick Questionnaire</ng-template>
-      <app-questionnaire [parentForm]="questionnaire"></app-questionnaire>
-      <div class="flex-row justify-content-center mt-2">
-        <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
-        <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
-      </div>
-    </form>
-  </mat-step>
-
-  <!-- Submit RSVP -->
-  <mat-step [stepControl]="rsvpInfo">
-      <form [formGroup]="rsvpInfo">
-        <ng-template matStepLabel>Submit RSVP</ng-template>
-        <app-submit-rsvp [parentForm]="rsvpInfo"></app-submit-rsvp>
+    <!-- Who's In? -->
+    <mat-step [stepControl]="identifyYourParty">
+      <form [formGroup]="identifyYourParty">
+        <ng-template matStepLabel>Who's In?</ng-template>
+        <app-identify-your-party [parentForm]="identifyYourParty"></app-identify-your-party>
+        <div class="flex-row justify-content-center mt-2">
+          <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
+          <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
+        </div>
       </form>
-  </mat-step>
+    </mat-step>
 
-</mat-horizontal-stepper>
+    <!-- Tell us your Dates -->
+    <mat-step [completed]="isCompleted">
+      <form [formGroup]="relayConflicts">
+        <ng-template matStepLabel>Tell Us Your Dates</ng-template>
+        <app-relay-your-conflicts [parentForm]="relayConflicts" (invalidForm)="statusChange($event)" (conflictsArray)="getConflictsArray($event)"></app-relay-your-conflicts>
+        <div class="flex-row justify-content-center mt-4">
+          <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
+          <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Quick Questionnaire -->
+    <mat-step [stepControl]="questionnaire">
+      <form [formGroup]="questionnaire">
+        <ng-template matStepLabel>Quick Questionnaire</ng-template>
+        <app-questionnaire [parentForm]="questionnaire"></app-questionnaire>
+        <div class="flex-row justify-content-center mt-2">
+          <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
+          <button mat-raised-button color="primary" matStepperNext class="ml-3" style="font-size:130%">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Submit RSVP -->
+    <mat-step>
+      <ng-template matStepLabel>Submit RSVP</ng-template>
+      <app-submit-rsvp [parentForm]="rsvpInfo"></app-submit-rsvp>
+      <div class="flex-row justify-content-center mt-2">
+        <button mat-raised-button color="primary" matStepperPrevious style="font-size:130%">Back</button>
+        <button mat-raised-button color="primary" type="button" (click)="submitRSVP()" class="ml-3" style="font-size:130%">Submit RSVP</button>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+  <mat-spinner style="margin:0 auto" *ngIf="showSpinner"></mat-spinner>
+</div>
+
+<div *ngIf="rsvpComplete">
+  <h1 class="flex-row justify-content-center">Thank you!</h1>
+  <p class="mt-3 mb-5" style="margin-left:50px;margin-right:50px;text-align:center">
+      All done! Thank you so much for filling out our RSVP. We hope to see you soon!
+  </p>
+</div>

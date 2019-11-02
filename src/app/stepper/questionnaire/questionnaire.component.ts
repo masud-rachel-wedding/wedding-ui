@@ -17,6 +17,8 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
   rentalCarSub: Subscription;
   changedLocationSub: Subscription;
 
+  stayWithYes: boolean = false;
+
   @Input() parentForm: FormGroup;
     /* Parent Form:
 
@@ -34,6 +36,12 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.stayWithSub = this.parentForm.get('stayWith').valueChanges.subscribe( val => {
+      if (val === 'yes') {
+        this.stayWithYes = true;
+      }
+      else {
+        this.stayWithYes = false;
+      }
       const payload = {
         question: 'stayWith',
         response: val

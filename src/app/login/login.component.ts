@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription, timer, Observable } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
 import { login } from '../store/app.actions';
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   showSpinner: boolean = false;
   intervalSubscription: Subscription;
 
-  @Output() loginResult = new EventEmitter<Boolean>();
+  @Output() loginResult = new EventEmitter<boolean>();
 
   constructor(private store: Store<AppState>) { }
 
