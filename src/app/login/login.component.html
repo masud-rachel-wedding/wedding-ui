@@ -12,11 +12,11 @@
             <input matInput formControlName="code" placeholder="Enter your code here" required>
           </mat-form-field>
         </div>
-          <mat-error *ngIf="loginFail" class="mb-2">Sorry, we don't recognize the code you entered. Please try again.</mat-error>
-          <div class="flex-column align-items-center" *ngIf="loginError">
-            <span style="font-weight:bold;font-size:120%;color:red">Sorry, an error has occurred!</span>
-            <span class="mt-1 mb-2" style="color:red">{{ error }}</span>
-          </div>
+        <mat-error *ngIf="loginFail" class="mb-2">{{ loginMsg }}</mat-error>
+        <div class="flex-column align-items-center" *ngIf="loginError">
+          <span style="font-weight:bold;font-size:120%;color:red">Sorry, an error has occurred!</span>
+          <span class="mt-1 mb-2" style="color:red">{{ errorMsg }}</span>
+        </div>
         <button mat-raised-button type="submit" style="font-size:120%" (click)="login()" class="mt-2" color="primary">
           Submit
         </button>
