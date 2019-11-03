@@ -4,6 +4,9 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from "@angular/material/stepper";
@@ -24,7 +27,7 @@ import { OurVisionComponent } from './stepper/our-vision/our-vision.component';
 import { IdentifyYourPartyComponent } from './stepper/identify-your-party/identify-your-party.component';
 import { RelayYourConflictsComponent } from './stepper/relay-your-conflicts/relay-your-conflicts.component';
 import { QuestionnaireComponent } from './stepper/questionnaire/questionnaire.component';
-import { SubmitRsvpComponent } from './stepper/submit-rsvp/submit-rsvp.component';
+import { Effects } from './store/app.effects';
 
 @NgModule({
   declarations: [
@@ -34,8 +37,7 @@ import { SubmitRsvpComponent } from './stepper/submit-rsvp/submit-rsvp.component
     OurVisionComponent,
     IdentifyYourPartyComponent,
     RelayYourConflictsComponent,
-    QuestionnaireComponent,
-    SubmitRsvpComponent,
+    QuestionnaireComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,8 @@ import { SubmitRsvpComponent } from './stepper/submit-rsvp/submit-rsvp.component
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({ reducer: Reducer }),
+    HttpClientModule,
+    EffectsModule.forRoot([Effects]),
     MatCardModule,
     MatProgressSpinnerModule,
     MatStepperModule,

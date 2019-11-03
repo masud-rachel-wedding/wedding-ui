@@ -5,10 +5,11 @@ import {
   FormControl,
   FormArray
 } from "@angular/forms";
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
-import { updateConflictsArray } from '../store/app.actions';
-import { Subscription, timer } from 'rxjs';
+import { updateConflictsArray, submitRSVP } from '../store/app.actions';
+import { Observable, Subscription } from 'rxjs';
+import { getSubmitResult } from '../store/app.selectors';
 
 @Component({
   selector: 'app-stepper',
@@ -16,8 +17,12 @@ import { Subscription, timer } from 'rxjs';
   styleUrls: ['./stepper.component.scss']
 })
 export class StepperComponent implements OnInit {
+  submitResult$: Observable<boolean>;
+  submitResultSub: Subscription;
+
   isLinear: boolean = true;
   isCompleted: boolean = false;
+  submissionError: boolean = false;
   showSpinner: boolean = false;
   rsvpComplete: boolean = false;
 
@@ -26,12 +31,10 @@ export class StepperComponent implements OnInit {
   conflictGroup2: FormGroup;
   relayConflicts: FormGroup;
   questionnaire: FormGroup;
-  rsvpInfo: FormGroup;
-
-  intervalSubscription: Subscription;
 
   conflictsArray: any[] = [];
   calendarHash = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
+  error: string = '';
 
   constructor(private store: Store<AppState>) { }
 
@@ -55,14 +58,27 @@ export class StepperComponent implements OnInit {
       'wholeTime': new FormControl(null, Validators.required),
       'rentalCar': new FormControl(null, Validators.required),
       'changedLocation': new FormControl(null, Validators.required),
-      'generalComment': new FormControl(null)    });
-    this.rsvpInfo = new FormGroup({
-      'done': new FormControl(null, Validators.required)
+      'generalComment': new FormControl(null)
     });
-  }
 
-  onSubmit(event: any) {
-    console.log(event);
+    this.submitResult$ = this.store.pipe( select( getSubmitResult ));
+    this.submitResultSub = this.submitResult$.subscribe( val => {
+      if(val === null) {
+        this.submissionError = false;
+        this.showSpinner = false;
+        this.rsvpComplete = false;
+      }
+      else if(val) {
+        this.submissionError = false;
+        this.showSpinner = false;
+        this.rsvpComplete = true;
+      }
+      else {
+        this.submissionError = true;
+        this.showSpinner = false;
+        this.rsvpComplete = false;
+      }
+    });
   }
 
   getDateArray(date: Date) {
@@ -97,13 +113,8 @@ export class StepperComponent implements OnInit {
     }
   }
 
-  submitRSVP() {
-    console.log('form submitted');
+  submit() {
     this.showSpinner = true;
-    this.intervalSubscription = timer(1000).subscribe( val => {
-      //this.store.dispatch( login(payload));
-      this.rsvpComplete = true;
-      this.showSpinner = false;
-    });
+    this.store.dispatch( submitRSVP());
   }
 }

@@ -8,7 +8,8 @@ import {
   updateOptOutKnowByDate,
   updateCountryVote,
   updateConflictsArray,
-  updateQuestionnaire
+  updateQuestionnaire,
+  updateSubmitResult
 }from './app.actions';
 
 export interface AppState {
@@ -39,19 +40,15 @@ export interface State {
     changedLocation: string,
     generalComment: string
   };
+  submitResult: boolean
 };
 
 const initialState: State = {
   code: null,
   countryVote: null,
-  partyMembers: ['Nila Bala', 'Mukie Ramkumar', 'Baby Shankur', 'Baby Sharktooth'],
+  partyMembers: null,
   party: {
-    members: [
-      { name: 'Nila Bala', status: null },
-      { name: 'Mukie Ramkumar', status: null },
-      { name: 'Baby Shankur', status: null },
-      { name: 'Baby Sharktooth', status: null }
-    ],
+    members: [],
     elaboration: null,
   },
   conflicts: {
@@ -69,7 +66,8 @@ const initialState: State = {
     rentalCar: null,
     changedLocation: null,
     generalComment: null
-  }
+  },
+  submitResult: null
 };
  
 export function Reducer(state: State | undefined, payload: Action) {
@@ -77,7 +75,17 @@ export function Reducer(state: State | undefined, payload: Action) {
     initialState,
 
     on( login, (state, payload) => {
-      return { ...state, code: payload.code };
+      let members: { name: string; status: string; }[] = [];
+      payload.partyMembers.forEach( member => {
+        members.push({ name: member, status: null });
+      });
+
+      const party = {
+        ...state.party,
+        members
+      };
+      
+      return { ...state, code: payload.code, partyMembers: payload.partyMembers, party };
     }),
 
     on( updateCountryVote, (state, payload) => {
@@ -168,6 +176,10 @@ export function Reducer(state: State | undefined, payload: Action) {
         ...question
       }
       return { ...state, questionnaire }
+    }),
+
+    on( updateSubmitResult, (state, payload) => {
+      return { ...state, submitResult: payload.result }
     })
 
   )(state, payload);
