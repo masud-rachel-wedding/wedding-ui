@@ -71,7 +71,10 @@
     </mat-step>
 
   </mat-horizontal-stepper>
-  <mat-spinner style="margin:0 auto" *ngIf="showSpinner"></mat-spinner>
+  <div class="flex-column align-items-center" *ngIf="showSpinner">
+    <mat-spinner style="margin:0 auto" ></mat-spinner>
+    <span class="mt-2">This may take a few seconds...</span>
+  </div>
 </div>
 
 <div *ngIf="rsvpComplete">
