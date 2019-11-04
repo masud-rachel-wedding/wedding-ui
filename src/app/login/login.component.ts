@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     let body = {
       code: loginCode
     }
-    this.http.post<{result: boolean, partyMembers?: string[], msg?: string}>(this.url, body, httpOptions).subscribe( response => {
+    this.http.post<{result: boolean, partyMembers?: string[], message?: string; error?: any}>(this.url, body, httpOptions).subscribe( response => {
       this.loginError = false;
       this.showSpinner = false;
       if(response.result) {
@@ -58,17 +58,20 @@ export class LoginComponent implements OnInit {
       }
       else {
         this.loginFail = true;
-        if(response.msg === 'INVALID_CODE') {
+        if(response.message === 'INVALID_CODE') {
           this.loginMsg = 'Sorry, we don\'t recognize the code you entered. Please try again.';
         }
-        if(response.msg === 'ALREADY_SUBMITTED') {
+        if(response.message === 'ALREADY_SUBMITTED') {
           this.loginMsg = 'Sorry, it looks like you have already submitted your RSVP. Contact Rachel (rachel.laviola@gmail.com) or Masud (mxz087000@gmail.com) if you need to make changes to your submission.';
+        }
+        if(response.message === 'ERROR') {
+          this.loginMsg = 'Sorry, an unknown error has occurred.';
+          console.log(response.error);
         }
       }
     }, error => {
-      console.log(error);
-      this.errorMsg = error.message;
       this.loginError = true;
+      this.errorMsg = error.message;
     });
   }
 }
