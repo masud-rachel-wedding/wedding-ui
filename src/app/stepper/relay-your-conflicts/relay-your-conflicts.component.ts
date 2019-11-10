@@ -123,6 +123,10 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
     });
   }
 
+  getControls() {
+    return (this.parentForm.get('conflicts') as FormArray).controls;
+  }
+
   getDateArray(date: Date) {
     let dateArray = date.toString().split(' ');
     return [ this.calendarHash[dateArray[1]], dateArray[2], dateArray[3] ];
