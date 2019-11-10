@@ -40,6 +40,10 @@ export class IdentifyYourPartyComponent implements OnInit, OnDestroy {
     });
   }
 
+  getControls() {
+    return (this.parentForm.get('partyMembersInfo') as FormArray).controls;
+  }
+
   tableChange(event: MatRadioButton, guestIdx: number) {
     let payload = {
       guestStatus: event.value,
