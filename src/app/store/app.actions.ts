@@ -8,6 +8,7 @@ export const updateOptOutPartyMembers = createAction('Update which party members
 export const updateOptOutElaboration = createAction('Update the opt-out elaboration', props<{ elaboration: string }>());
 export const updateOptOutKnowByDate = createAction('Update the opt-out know-by date', props<{ knowByDate: string[] }>());
 export const updateConflictsArray = createAction('Update the conflicts array', props<{ conflictsArray: any }>());
+export const updateConflictsElaboration = createAction('Update the conflicts elaboration', props<{ elaboration: string }>());
 export const updateQuestionnaire = createAction('Update the questionnaire', props<{ question: string, response: string }>());
 export const submitRSVP = createAction('Submit RSVP info');
 export const updateSubmitResult = createAction('Update the result of the final submit', props<{ result: boolean }>());

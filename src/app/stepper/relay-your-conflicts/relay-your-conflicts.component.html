@@ -1,6 +1,6 @@
 <h1 class="flex-row justify-content-center">Tell us When You're Not Free</h1>
 <p style="margin-left:50px;margin-right:50px;text-align:center">
-    If you know that you and your party will be good to join us at any time in July, August, or Septemer of 2020, feel free to move on to the next step.
+    If you know that you and your party will be good to join us at any time in July, August, or September of 2020, feel free to move on to the next step.
 </p>
 <p style="margin-left:50px;margin-right:50px;text-align:center">
   Alternatively, if you know that you and your party can't make it, you can also feel free to move on to the next step.
@@ -121,5 +121,11 @@
   </div>
 </div>
 <mat-error class="mt-2" style="margin-left:80px;font-weight:bold;font-size:110%" *ngIf="invalidDate">{{ errorMessage }}</mat-error>
+<div class="flex-column align-items-center mt-4 mb-4">
+  <mat-form-field appearance="outline" style="width:65%">
+    <mat-label>If the table doesn't capture everything you want to say, feel free to elaborate here.</mat-label>
+    <textarea matInput ngModel #textArea="ngModel" (blur)="saveConflictsElaboration(textArea)" rows="5" class="dark-outline" style="font-size:85%"></textarea>
+  </mat-form-field>
+</div>
 
 
