@@ -95,7 +95,6 @@ export class StepperComponent implements OnInit {
   }
 
   stepChange(event: any) {
-    console.log(event);
     if (event.selectedIndex == 2 && !event.selectedStep.interacted) {
       this.isCompleted = true;
     }

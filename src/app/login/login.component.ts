@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   loginError: boolean = false;
 
   url: string = 'http://ec2-3-88-85-49.compute-1.amazonaws.com:4000/login/';
+  // url: string = 'http://localhost:4000/login/';
   errorMsg: string = '';
   loginMsg: string = '';
 

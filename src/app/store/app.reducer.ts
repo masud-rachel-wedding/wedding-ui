@@ -9,7 +9,8 @@ import {
   updateCountryVote,
   updateConflictsArray,
   updateQuestionnaire,
-  updateSubmitResult
+  updateSubmitResult,
+  updateConflictsElaboration
 }from './app.actions';
 
 export interface AppState {
@@ -31,6 +32,7 @@ export interface State {
       elaboration: string;
       knowByDate: string[];
     };
+    elaboration: string;
   };
   questionnaire: {
     stayWith: string,
@@ -57,7 +59,8 @@ const initialState: State = {
       partyMembers: [],
       elaboration: null,
       knowByDate: [],
-    }
+    },
+    elaboration: null
   },
   questionnaire: {
     stayWith: null,
@@ -163,6 +166,14 @@ export function Reducer(state: State | undefined, payload: Action) {
       let conflicts = {
         ...state.conflicts,
         conflictsArray
+      }
+      return { ...state, conflicts };
+    }),
+
+    on( updateConflictsElaboration, (state, payload) => {
+      let conflicts = {
+        ...state.conflicts,
+        elaboration: payload.elaboration
       }
       return { ...state, conflicts };
     }),

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, NgModel } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Observable, Subscription } from 'rxjs';
@@ -8,7 +8,8 @@ import { MatCheckbox } from '@angular/material';
 import {
   updateOptOutPartyMembers,
   updateOptOutElaboration,
-  updateOptOutKnowByDate
+  updateOptOutKnowByDate,
+  updateConflictsElaboration
 } from 'src/app/store/app.actions';
 import { EventEmitter } from '@angular/core';
 
@@ -185,6 +186,13 @@ export class RelayYourConflictsComponent implements OnInit, OnDestroy {
 
   removeConflict(i: number) {
     (<FormArray>this.parentForm.get('conflicts')).removeAt(i);
+  }
+
+  saveConflictsElaboration(event: NgModel) {
+    let payload = {
+      elaboration: event.value as string
+    }
+    this.store.dispatch( updateConflictsElaboration( payload));
   }
 
   ngOnDestroy() {
