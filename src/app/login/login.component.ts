@@ -3,14 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
 import { login } from '../store/app.actions';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IfStmt } from '@angular/compiler';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 
-    'Access-Control-Allow-Origin':'*'
-  })
-};
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +17,8 @@ export class LoginComponent implements OnInit {
   loginFail: boolean = true;
   loginError: boolean = false;
 
-  url: string = 'http://ec2-3-88-85-49.compute-1.amazonaws.com:4000/login/';
-  // url: string = 'http://localhost:4000/login/';
+  // url: string = 'http://ec2-3-88-85-49.compute-1.amazonaws.com:4000/login/';
+  url: string = 'http://localhost:4000/login';
   errorMsg: string = '';
   loginMsg: string = '';
 
@@ -45,8 +38,9 @@ export class LoginComponent implements OnInit {
     let body = {
       code: loginCode
     }
-    this.http.post<{result: boolean, partyMembers?: string[], message?: string; error?: any}>(this.url, body, httpOptions).subscribe( response => {
+    this.http.post<{result: boolean, partyMembers?: string[], message?: string; error?: any}>(this.url, body).subscribe( response => {
       this.loginError = false;
+      this.loginFail = false;
       this.showSpinner = false;
       if(response.result) {
         this.loginFail = false;
@@ -72,7 +66,9 @@ export class LoginComponent implements OnInit {
       }
     }, error => {
       this.loginError = true;
-      this.errorMsg = error.message;
+      this.loginFail = false;
+      this.errorMsg = error.error.message;
+      this.showSpinner = false;
     });
   }
 }
